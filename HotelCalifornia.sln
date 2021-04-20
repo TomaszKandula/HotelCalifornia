@@ -2,6 +2,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia", "HotelCalifornia\HotelCalifornia.csproj", "{73AAD97A-D2E9-4184-B782-58A5C470CB2D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Core", "Backend\HotelCalifornia.Backend.Core\HotelCalifornia.Backend.Core.csproj", "{A425E495-68BC-4AD3-9789-CC04606F3A0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Cqrs", "Backend\HotelCalifornia.Backend.Cqrs\HotelCalifornia.Backend.Cqrs.csproj", "{9333173F-4FFD-4F4A-B88B-9451B2209733}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Database", "Backend\HotelCalifornia.Backend.Database\HotelCalifornia.Backend.Database.csproj", "{A0486B7D-4942-4A06-BDAB-9393D88287D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Domain", "Backend\HotelCalifornia.Backend.Domain\HotelCalifornia.Backend.Domain.csproj", "{C5FC0033-6F64-44EA-B591-18C06E599CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Shared", "Backend\HotelCalifornia.Backend.Shared\HotelCalifornia.Backend.Shared.csproj", "{C9C3E541-C5CC-4013-947D-98D022AD07E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +24,32 @@ Global
 		{73AAD97A-D2E9-4184-B782-58A5C470CB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73AAD97A-D2E9-4184-B782-58A5C470CB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73AAD97A-D2E9-4184-B782-58A5C470CB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A425E495-68BC-4AD3-9789-CC04606F3A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A425E495-68BC-4AD3-9789-CC04606F3A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A425E495-68BC-4AD3-9789-CC04606F3A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A425E495-68BC-4AD3-9789-CC04606F3A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9333173F-4FFD-4F4A-B88B-9451B2209733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9333173F-4FFD-4F4A-B88B-9451B2209733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9333173F-4FFD-4F4A-B88B-9451B2209733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9333173F-4FFD-4F4A-B88B-9451B2209733}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0486B7D-4942-4A06-BDAB-9393D88287D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0486B7D-4942-4A06-BDAB-9393D88287D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0486B7D-4942-4A06-BDAB-9393D88287D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0486B7D-4942-4A06-BDAB-9393D88287D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5FC0033-6F64-44EA-B591-18C06E599CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5FC0033-6F64-44EA-B591-18C06E599CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5FC0033-6F64-44EA-B591-18C06E599CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5FC0033-6F64-44EA-B591-18C06E599CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9C3E541-C5CC-4013-947D-98D022AD07E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9C3E541-C5CC-4013-947D-98D022AD07E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9C3E541-C5CC-4013-947D-98D022AD07E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9C3E541-C5CC-4013-947D-98D022AD07E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A425E495-68BC-4AD3-9789-CC04606F3A0B} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
+		{9333173F-4FFD-4F4A-B88B-9451B2209733} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
+		{A0486B7D-4942-4A06-BDAB-9393D88287D3} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
+		{C5FC0033-6F64-44EA-B591-18C06E599CD3} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
+		{C9C3E541-C5CC-4013-947D-98D022AD07E8} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
 	EndGlobalSection
 EndGlobal
