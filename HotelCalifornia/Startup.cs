@@ -1,29 +1,49 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelCalifornia
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        private readonly IConfiguration FConfiguration;
+        private readonly IWebHostEnvironment FEnvironment;
+
+        public Startup(IConfiguration AConfiguration, IWebHostEnvironment AEnvironment)
+        {
+            FConfiguration = AConfiguration;
+            FEnvironment = AEnvironment;
+        }
+        
+        public void ConfigureServices(IServiceCollection AServices)
         {
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder AApplication, AppUrls AAppUrls)
         {
-            if (env.IsDevelopment())
+            AApplication.UseResponseCompression();
+            AApplication.UseHttpsRedirection();
+            AApplication.UseStaticFiles();
+            AApplication.UseSpaStaticFiles();
+            AApplication.UseRouting();
+
+            if (FEnvironment.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                AApplication.UseSwagger();
+                AApplication.UseSwaggerUI(AOption =>
+                    AOption.SwaggerEndpoint("/swagger/v1/swagger.json", "TokanPagesApi version 1"));
             }
 
-            app.UseRouting();
+            AApplication.UseEndpoints(AEndpoints => 
+                AEndpoints.MapControllers());
 
-            app.UseEndpoints(endpoints =>
+            AApplication.UseSpa(ASpa =>
             {
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Empty project"); });
+                ASpa.Options.SourcePath = "ClientApp";
+                if (FEnvironment.IsDevelopment())
+                    ASpa.UseProxyToSpaDevelopmentServer(AAppUrls.DevelopmentOrigin);
             });
         }
     }
