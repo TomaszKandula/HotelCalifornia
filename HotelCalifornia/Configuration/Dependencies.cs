@@ -7,6 +7,7 @@ using HotelCalifornia.Backend.Cqrs;
 using HotelCalifornia.Backend.Database;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Core.Behaviours;
+using HotelCalifornia.Backend.Database.Initialize;
 using HotelCalifornia.Backend.Core.Services.AppLogger;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using FluentValidation;
@@ -69,7 +70,7 @@ namespace HotelCalifornia.Configuration
         {
             AServices.AddHttpContextAccessor();
             AServices.AddScoped<IDateTimeService, DateTimeService>();
-            //AServices.AddScoped<IDbInitializer, DbInitializer>();
+            AServices.AddScoped<IDbInitializer, DbInitializer>();
         }
 
         private static void SetupValidators(IServiceCollection AServices)

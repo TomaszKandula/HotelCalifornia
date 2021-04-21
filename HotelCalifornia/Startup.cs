@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using HotelCalifornia.Configuration;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Shared.Environment;
+using HotelCalifornia.Backend.Database.Initialize;
 
 namespace HotelCalifornia
 {
@@ -60,6 +61,13 @@ namespace HotelCalifornia
 
         public void Configure(IApplicationBuilder AApplication, AppUrls AAppUrls)
         {
+            var LScopeFactory = AApplication.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using var LScope = LScopeFactory.CreateScope();
+            var LDatabaseInitializer = LScope.ServiceProvider.GetService<IDbInitializer>();
+
+            if (FEnvironment.IsDevelopment() || EnvironmentVariables.IsStaging())
+                LDatabaseInitializer?.SeedData();
+            
             AApplication.UseResponseCompression();
             AApplication.UseHttpsRedirection();
             AApplication.UseStaticFiles();
