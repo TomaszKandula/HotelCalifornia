@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HotelCalifornia.Backend.Database\HotelCalifornia.Backend.Database.csproj" />
       <ProjectReference Include="..\HotelCalifornia.Backend.Shared\HotelCalifornia.Backend.Shared.csproj" />
     </ItemGroup>
 
