@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Backend\HotelCalifornia.Backend.Cqrs\HotelCalifornia.Backend.Cqrs.csproj" />
       <ProjectReference Include="..\Backend\HotelCalifornia.Backend.Shared\HotelCalifornia.Backend.Shared.csproj" />
     </ItemGroup>
 

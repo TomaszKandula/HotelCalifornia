@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;
+using HotelCalifornia.Backend.Cqrs.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using HotelCalifornia.Backend.Shared.Dto.Booking;
 using MediatR;
@@ -21,6 +23,6 @@ namespace HotelCalifornia.Controllers
 
         [HttpPost]
         public async Task<Unit> RemoveBooking([FromBody] RemoveBookingDto APayLoad)
-            => await FMediator.Send(BookingMapper.MapToRemoveUserCommand(APayLoad));
+            => await FMediator.Send(BookingMapper.MapToRemoveBookingCommand(APayLoad));
     }
 }
