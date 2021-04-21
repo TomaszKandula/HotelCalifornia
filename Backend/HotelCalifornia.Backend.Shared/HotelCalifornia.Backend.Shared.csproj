@@ -8,4 +8,19 @@
       <ProjectReference Include="..\HotelCalifornia.Backend.Core\HotelCalifornia.Backend.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\ErrorCodes.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ErrorCodes.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\ErrorCodes.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ErrorCodes.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
