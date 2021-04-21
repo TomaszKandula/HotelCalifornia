@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.ResponseCompression;
 using HotelCalifornia.Configuration;
+using HotelCalifornia.CustomHandlers;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Shared.Environment;
 using HotelCalifornia.Backend.Database.Initialize;
@@ -67,7 +68,8 @@ namespace HotelCalifornia
 
             if (FEnvironment.IsDevelopment() || EnvironmentVariables.IsStaging())
                 LDatabaseInitializer?.SeedData();
-            
+
+            AApplication.UseExceptionHandler(ExceptionHandler.Handle);
             AApplication.UseResponseCompression();
             AApplication.UseHttpsRedirection();
             AApplication.UseStaticFiles();
