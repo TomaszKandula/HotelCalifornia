@@ -7,7 +7,7 @@ namespace HotelCalifornia.Backend.Domain.Entities
     public class Bookings : Entity<Guid>
     {
         [Required]
-        public int RoomId { get; set; }
+        public Guid RoomId { get; set; }
 
         public Rooms Room { get; set; }
         
