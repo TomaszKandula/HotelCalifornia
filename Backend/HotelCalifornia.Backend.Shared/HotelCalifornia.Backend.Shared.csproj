@@ -13,6 +13,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ErrorCodes.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\ValidationCodes.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ValidationCodes.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -20,6 +24,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ErrorCodes.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\ValidationCodes.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ValidationCodes.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
