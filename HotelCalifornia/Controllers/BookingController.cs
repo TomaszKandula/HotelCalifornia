@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using HotelCalifornia.Backend.Shared.Dto.Booking;
 using MediatR;
 
 namespace HotelCalifornia.Controllers
