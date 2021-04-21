@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HotelCalifornia.Backend.Cqrs;
+using HotelCalifornia.Backend.Database;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Core.Behaviours;
 using HotelCalifornia.Backend.Core.Services.AppLogger;

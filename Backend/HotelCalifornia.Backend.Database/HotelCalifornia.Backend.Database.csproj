@@ -22,6 +22,10 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HotelCalifornia.Backend.Domain\HotelCalifornia.Backend.Domain.csproj" />
+    </ItemGroup>
     
     
     
