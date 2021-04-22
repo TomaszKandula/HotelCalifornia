@@ -22,8 +22,8 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
                 .Select(ABookings => new GetAllBookingsQueryResult
                 {
                     Id = ABookings.Id,
-                    RoomNumber = ABookings.Room.Bedrooms,
-                    Bedrooms = ABookings.Room.RoomNumber,
+                    RoomNumber = ABookings.Room.RoomNumber,
+                    Bedrooms = ABookings.Room.Bedrooms,
                     GuestFullName = ABookings.GuestFullName,
                     GuestPhoneNumber = ABookings.GuestPhoneNumber,
                     DateFrom = ABookings.DateFrom,
