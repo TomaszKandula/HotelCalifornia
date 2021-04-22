@@ -68,5 +68,23 @@ namespace HotelCalifornia.Backend.Shared.Resources {
                 return ResourceManager.GetString("REQUIRED", resourceCulture);
             }
         }
+        
+        public static string START_DATE_CANNOT_BE_EARLIER_THAN_TODAY {
+            get {
+                return ResourceManager.GetString("START_DATE_CANNOT_BE_EARLIER_THAN_TODAY", resourceCulture);
+            }
+        }
+        
+        public static string END_DATE_CANNOT_BE_EARLIER_THAN_TODAY {
+            get {
+                return ResourceManager.GetString("END_DATE_CANNOT_BE_EARLIER_THAN_TODAY", resourceCulture);
+            }
+        }
+        
+        public static string END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE {
+            get {
+                return ResourceManager.GetString("END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE", resourceCulture);
+            }
+        }
     }
 }

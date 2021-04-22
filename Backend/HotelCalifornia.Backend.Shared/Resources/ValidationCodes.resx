@@ -30,4 +30,13 @@
     <data name="REQUIRED" xml:space="preserve">
         <value>This field is required</value>
     </data>
+    <data name="START_DATE_CANNOT_BE_EARLIER_THAN_TODAY" xml:space="preserve">
+        <value>The start date cannot be earlier than today</value>
+    </data>
+    <data name="END_DATE_CANNOT_BE_EARLIER_THAN_TODAY" xml:space="preserve">
+        <value>The end date cannot be earlier than today</value>
+    </data>
+    <data name="END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE" xml:space="preserve">
+        <value>The end date cannot be earlier than start date</value>
+    </data>
 </root>

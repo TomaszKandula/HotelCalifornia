@@ -12,10 +12,12 @@
       <EmbeddedResource Update="Resources\ErrorCodes.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ErrorCodes.Designer.cs</LastGenOutput>
+        <Generator>PublicResXFileCodeGenerator</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\ValidationCodes.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ValidationCodes.Designer.cs</LastGenOutput>
+        <Generator>PublicResXFileCodeGenerator</Generator>
       </EmbeddedResource>
     </ItemGroup>
 
