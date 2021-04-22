@@ -14,8 +14,5 @@ namespace HotelCalifornia.Backend.Core.Extensions
 
         public static IRuleBuilderOptions<T, DateRangeValidator> IsValidDateRange<T>(this IRuleBuilder<T, DateRangeValidator> ARuleBuilder)
             =>  ARuleBuilder.Must(ADate => ADate.EndDate == null || ADate.StartDate <= ADate.EndDate);
-        
-        public static IRuleBuilderOptions<T, DateRangeValidator> IsSameDate<T>(this IRuleBuilder<T, DateRangeValidator> ARuleBuilder)
-            =>  ARuleBuilder.Must(ADate => ADate.StartDate == ADate.EndDate);
     }
 }

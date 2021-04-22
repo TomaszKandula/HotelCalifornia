@@ -141,8 +141,9 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             var LResult = LValidator.Validate(LAddBookingCommand);
 
             // Assert
-            LResult.Errors.Count.Should().Be(1);
-            LResult.Errors[0].ErrorCode.Should().Be(nameof(ValidationCodes.START_DATE_AND_END_DATE_CANNOT_BE_SAME));
+            LResult.Errors.Count.Should().Be(2);
+            LResult.Errors[0].ErrorCode.Should().Be(nameof(ValidationCodes.START_DATE_CANNOT_BE_EARLIER_THAN_TODAY));
+            LResult.Errors[1].ErrorCode.Should().Be(nameof(ValidationCodes.END_DATE_CANNOT_BE_EARLIER_THAN_TODAY));
         }
         
         [Fact]
