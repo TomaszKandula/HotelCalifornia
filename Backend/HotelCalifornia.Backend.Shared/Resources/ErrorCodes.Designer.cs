@@ -44,28 +44,40 @@ namespace HotelCalifornia.Backend.Shared.Resources {
                 resourceCulture = value;
             }
         }
-
+        
         public static string ACCESS_DENIED {
             get {
                 return ResourceManager.GetString("ACCESS_DENIED", resourceCulture);
             }
         }
-
+        
         public static string BOOKING_DOES_NOT_EXISTS {
             get {
                 return ResourceManager.GetString("BOOKING_DOES_NOT_EXISTS", resourceCulture);
             }
         }
-
+        
         public static string ERROR_UNEXPECTED {
             get {
                 return ResourceManager.GetString("ERROR_UNEXPECTED", resourceCulture);
             }
         }
-
+        
         public static string GUEST_DOES_NOT_EXISTS {
             get {
                 return ResourceManager.GetString("GUEST_DOES_NOT_EXISTS", resourceCulture);
+            }
+        }
+        
+        public static string REQUESTED_BEDROOMS_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("REQUESTED_BEDROOMS_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        public static string NO_AVAILABLE_ROOMS {
+            get {
+                return ResourceManager.GetString("NO_AVAILABLE_ROOMS", resourceCulture);
             }
         }
     }

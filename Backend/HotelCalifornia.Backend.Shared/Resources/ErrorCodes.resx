@@ -30,4 +30,10 @@
     <data name="GUEST_DOES_NOT_EXISTS" xml:space="preserve">
         <value>Requested guest does not exists</value>
     </data>
+    <data name="REQUESTED_BEDROOMS_UNAVAILABLE" xml:space="preserve">
+        <value>There are no rooms with requested number of bedrooms</value>
+    </data>
+    <data name="NO_AVAILABLE_ROOMS" xml:space="preserve">
+        <value>We do not have available rooms within given dates at the moment</value>
+    </data>
 </root>
