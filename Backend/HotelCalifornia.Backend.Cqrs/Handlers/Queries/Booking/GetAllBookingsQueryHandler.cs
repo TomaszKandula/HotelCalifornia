@@ -7,11 +7,11 @@ using HotelCalifornia.Backend.Database;
 
 namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
 {
-    public class GetAllArticlesQueryHandler : TemplateHandler<GetAllBookingsQuery, IEnumerable<GetAllBookingsQueryResult>>
+    public class GetAllBookingsQueryHandler : TemplateHandler<GetAllBookingsQuery, IEnumerable<GetAllBookingsQueryResult>>
     {
         private readonly DatabaseContext FDatabaseContext;
         
-        public GetAllArticlesQueryHandler(DatabaseContext ADatabaseContext) 
+        public GetAllBookingsQueryHandler(DatabaseContext ADatabaseContext) 
             => FDatabaseContext = ADatabaseContext;
 
         public override async Task<IEnumerable<GetAllBookingsQueryResult>> Handle(GetAllBookingsQuery ARequest, CancellationToken ACancellationToken)
