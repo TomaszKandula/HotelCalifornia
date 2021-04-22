@@ -39,4 +39,7 @@
     <data name="END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE" xml:space="preserve">
         <value>The end date cannot be earlier than start date</value>
     </data>
+    <data name="START_DATE_AND_END_DATE_CANNOT_BE_SAME" xml:space="preserve">
+        <value>The start date cannot be the same as end date</value>
+    </data>
 </root>

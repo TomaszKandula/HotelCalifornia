@@ -21,7 +21,7 @@ namespace HotelCalifornia.Backend.Shared.Resources {
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public ValidationCodes() {
+        internal ValidationCodes() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -84,6 +84,12 @@ namespace HotelCalifornia.Backend.Shared.Resources {
         public static string END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE {
             get {
                 return ResourceManager.GetString("END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE", resourceCulture);
+            }
+        }
+        
+        public static string START_DATE_AND_END_DATE_CANNOT_BE_SAME {
+            get {
+                return ResourceManager.GetString("START_DATE_AND_END_DATE_CANNOT_BE_SAME", resourceCulture);
             }
         }
     }
