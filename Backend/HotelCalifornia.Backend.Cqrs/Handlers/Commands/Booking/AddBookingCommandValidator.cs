@@ -22,7 +22,7 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking
                 .NotEmpty()
                 .WithErrorCode(nameof(ValidationCodes.REQUIRED))
                 .WithMessage(ValidationCodes.REQUIRED)
-                .MaximumLength(255)
+                .MaximumLength(12)
                 .WithErrorCode(nameof(ValidationCodes.PHONE_NUMBER_TOO_LONG))
                 .WithMessage(ValidationCodes.PHONE_NUMBER_TOO_LONG);
 
