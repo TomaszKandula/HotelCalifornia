@@ -3,10 +3,9 @@ import MainPage from "./Pages/mainPage";
 import UserPage from "./Pages/userPage";
 import ManagerPage from "./Pages/managerPage";
 
-import "./App.css";
 import 'bootstrap/dist/css/bootstrap.css';
 
-function App() 
+export default function App() 
 {
     return (
         <Router>
@@ -18,5 +17,3 @@ function App()
         </Router>
     );
 }
-
-export default App;
