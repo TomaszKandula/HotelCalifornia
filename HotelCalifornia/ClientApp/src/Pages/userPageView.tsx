@@ -3,7 +3,7 @@ import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { AlertDialog } from "../Components/alertDialog";
 import { IconType } from "Shared/enums";
 
-interface IUserPageView 
+interface IBinding 
 {
     state: boolean;
     handle: any;
@@ -19,7 +19,7 @@ interface IUserPageView
     dateTo: string;
 }
 
-export const UserPageView = (props: IUserPageView) => 
+export const UserPageView = (props: IBinding) => 
 {
     return (
         <Container>

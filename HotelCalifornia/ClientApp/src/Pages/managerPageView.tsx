@@ -2,12 +2,12 @@ import { Container, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { IGetAllBookings, IBookings } from "../Redux/States/getAllBookingsState";
 
-interface IManagerPageView 
+interface IBinding 
 {
     bookings: IGetAllBookings;
 }
 
-export const ManagerPageView = (props: IManagerPageView) => 
+export const ManagerPageView = (props: IBinding) => 
 {
     return(
         <Container style={{ marginTop: "30px", marginBottom: "25px" }}>
