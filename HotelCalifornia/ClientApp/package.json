@@ -41,6 +41,7 @@
     "ts-jest": "^26.5.5"
   },
   "scripts": {
+    "shared-test": "jest --verbose ./Shared",
     "test": "cross-env CI=true react-scripts test --env=jsdom --verbose",
     "start": "react-scripts start",
     "build": "react-scripts build",
