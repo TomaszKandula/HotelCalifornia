@@ -2,7 +2,7 @@ import { Action, Reducer } from "@reduxjs/toolkit";
 import { IRaiseError } from "../States/raiseErrorState";
 import { combinedDefaults } from "../combinedDefaults";
 import { CLEAR_ERROR, RAISE_ERROR, TErrorActions } from "../Actions/raiseErrorAction";
-import { NO_ERRORS } from "../../Shared/constants";
+import { NO_ERRORS, RECEIVED_ERROR_MESSAGE } from "../../Shared/constants";
 
 export const RaiseErrorReducer: Reducer<IRaiseError> = (state: IRaiseError | undefined, incomingAction: Action): IRaiseError => 
 {
@@ -19,7 +19,7 @@ export const RaiseErrorReducer: Reducer<IRaiseError> = (state: IRaiseError | und
 
         case RAISE_ERROR:
             return {
-                defaultErrorMessage: NO_ERRORS,
+                defaultErrorMessage: RECEIVED_ERROR_MESSAGE,
                 attachedErrorObject: action.errorObject
             }
 
