@@ -3,6 +3,7 @@ import { AppThunkAction } from "../applicationState";
 import { IAddBookingDto } from "../../Models";
 import { API_COMMAND_ADD_BOOKING } from "../../Shared/constants";
 import { UnexpectedStatusCode } from "../../Shared/textWrappers";
+import { GetErrorMessage } from "../../Shared/helpers";
 import { RAISE_ERROR, TErrorActions } from "./raiseErrorAction";
 
 export const ADD_BOOKING = "ADD_BOOKING";
@@ -54,7 +55,7 @@ export const ActionCreators =
         .catch(error => 
         {
             dispatch({ type: ADD_BOOKING_ERROR });
-            dispatch({ type: RAISE_ERROR, errorObject: error });
+            dispatch({ type: RAISE_ERROR, errorObject: GetErrorMessage(error) });
         });
     }
 }

@@ -3,6 +3,7 @@ import { AppThunkAction } from "../applicationState";
 import { IBookings } from "../States/getAllBookingsState";
 import { RAISE_ERROR, TErrorActions } from "./raiseErrorAction";
 import { UnexpectedStatusCode } from "../../Shared/textWrappers";
+import { GetErrorMessage } from "../../Shared/helpers";
 import { API_QUERY_GET_BOOKINGS } from "../../Shared/constants";
 
 export const REQUEST_BOOKINGS = "REQUEST_BOOKINGS";
@@ -35,7 +36,7 @@ export const ActionCreators =
         })
         .catch(error => 
         {
-            dispatch({ type: RAISE_ERROR, errorObject: error });
+            dispatch({ type: RAISE_ERROR, errorObject: GetErrorMessage(error) });
         });
     }
 }

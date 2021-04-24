@@ -3,6 +3,7 @@ import { AppThunkAction } from "../applicationState";
 import { IRemoveBookingDto } from "../../Models";
 import { API_COMMAND_REMOVE_BOOKING } from "../../Shared/constants";
 import { UnexpectedStatusCode } from "../../Shared/textWrappers";
+import { GetErrorMessage } from "../../Shared/helpers";
 import { RAISE_ERROR, TErrorActions } from "./raiseErrorAction";
 
 export const REMOVE_BOOKING = "REMOVE_BOOKING";
@@ -36,7 +37,7 @@ export const ActionCreators =
         })
         .catch(error => 
         {
-            dispatch({ type: RAISE_ERROR, errorObject: error });
+            dispatch({ type: RAISE_ERROR, errorObject: GetErrorMessage(error) });
         });
     }
 }
