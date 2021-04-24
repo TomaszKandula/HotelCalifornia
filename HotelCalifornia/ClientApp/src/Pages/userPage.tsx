@@ -2,10 +2,14 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
-import { IApplicationState } from "Redux/applicationState";
-import { IAddBookingDto } from "../Models";
+import { IApplicationState } from "../Redux/applicationState";
 import { ActionCreators } from "../Redux/Actions/addBookingAction";
-import { OperationStatus } from "../Shared/enums";
+import { IAddBookingDto } from "../Models";
+import { BookingError, BookingSuccess, BookingWarning } from "../Shared/textWrappers";
+import { IconType, OperationStatus } from "../Shared/enums";
+import { ValidateBookingForm } from "../Shared/validate";
+import { AlertDialog, alertModalDefault } from "../Components/alertDialog";
+import Validate from "validate.js";
 
 const formDefaultValues: IAddBookingDto = 
 {
@@ -19,9 +23,15 @@ const formDefaultValues: IAddBookingDto =
 export default function UserPage() 
 {
     const [progress, setProgress] = React.useState(false);
+    const [modal, setModal] = React.useState(alertModalDefault);
     const [form, setForm] = React.useState(formDefaultValues);
 
+    const showSuccess = (text: string) => { setModal({ state: true, title: "Booking", message: text, icon: IconType.info }); };
+    const showWarning = (text: string) => { setModal({ state: true, title: "Warning", message: text, icon: IconType.warning }); };
+    const showError = (text: string) => { setModal({ state: true, title: "Error", message: text, icon: IconType.error }); };
+        
     const addBookingState = useSelector((state: IApplicationState) => state.addBooking);
+    const raiseErrorState = useSelector((state: IApplicationState) => state.raiseError);
     const dispatch = useDispatch();
 
     const addBooking = React.useCallback((payload: IAddBookingDto) => 
@@ -33,7 +43,6 @@ export default function UserPage()
     React.useEffect(() => 
     {
         if (addBookingState === undefined) return;
-
         if (addBookingState.isAddingBooking === OperationStatus.notStarted && progress)
         {
             addBooking(
@@ -56,10 +65,11 @@ export default function UserPage()
             if (addBookingState.hasAddedBooking 
                 && addBookingState.isAddingBooking === OperationStatus.hasFinished)
             {
-                // show success alert dialog
+                showSuccess(BookingSuccess());
+                return;
             }
 
-            addBookingClear();
+            showError(BookingError(raiseErrorState.attachedErrorObject));
         }       
     }, 
     [ addBooking, addBookingClear, addBookingState, form, progress ]);
@@ -67,14 +77,27 @@ export default function UserPage()
     const formHandler = (event: React.ChangeEvent<HTMLInputElement>) => 
     { setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value }); };
 
+    const modalHandler = () => 
+    { 
+        addBookingClear();
+        setModal({ ...modal, state: false }); 
+    };
+
     const buttonHandler = () => 
     {
-        // add validation
-        setProgress(true);
+        let results = ValidateBookingForm(form);
+        if (!Validate.isDefined(results))
+        {
+            setProgress(true);
+            return;
+        }
+
+        showWarning(BookingWarning(results));
     };
 
     return (
         <Container>
+            <AlertDialog state={modal.state} handle={modalHandler} title={modal.title} message={modal.message} icon={modal.icon} />
             <Row>
                 <Col></Col>
                 <Col xs={6}>
