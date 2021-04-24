@@ -46,7 +46,7 @@ const GetErrorMessage = (errorObject: any): string =>
 
         if (parsedJson.ValidationErrors !== null) 
         {
-            result = result + ", " + VALIDATION_ERRORS + ".";
+            result = result + ". " + VALIDATION_ERRORS;
         }
     }
 
