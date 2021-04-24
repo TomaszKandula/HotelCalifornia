@@ -6,11 +6,11 @@ export interface IGetAllBookings
 
 export interface IBookings
 {
-    Id: string;
-    RoomNumber: number;
-    Bedrooms: number;
-    GuestFullName: string;
-    GuestPhoneNumber: string;
-    DateFrom: string;
-    DateTo: string;
+    id: string;
+    roomNumber: number;
+    bedrooms: number;
+    guestFullName: string;
+    guestPhoneNumber: string;
+    dateFrom: string;
+    dateTo: string;
 }
