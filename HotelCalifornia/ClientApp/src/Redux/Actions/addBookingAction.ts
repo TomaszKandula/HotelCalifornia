@@ -2,6 +2,7 @@ import axios from "axios";
 import { AppThunkAction } from "../applicationState";
 import { IAddBookingDto } from "../../Models";
 import { API_COMMAND_ADD_BOOKING } from "../../Shared/constants";
+import { UnexpectedStatusCode } from "../../Shared/textWrappers";
 import { RAISE_ERROR, TErrorActions } from "./raiseErrorAction";
 
 export const ADD_BOOKING = "ADD_BOOKING";
@@ -48,7 +49,7 @@ export const ActionCreators =
         {
             return response.status === 200 
                 ? dispatch({ type: ADD_BOOKING_RESPONSE, hasAddedBooking: true })
-                : dispatch({ type: RAISE_ERROR, errorObject: response.status });
+                : dispatch({ type: RAISE_ERROR, errorObject: UnexpectedStatusCode(response.status) });
         })
         .catch(error => 
         {

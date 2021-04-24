@@ -2,6 +2,7 @@ import axios from "axios";
 import { AppThunkAction } from "../applicationState";
 import { IRemoveBookingDto } from "../../Models";
 import { API_COMMAND_REMOVE_BOOKING } from "../../Shared/constants";
+import { UnexpectedStatusCode } from "../../Shared/textWrappers";
 import { RAISE_ERROR, TErrorActions } from "./raiseErrorAction";
 
 export const REMOVE_BOOKING = "REMOVE_BOOKING";
@@ -31,7 +32,7 @@ export const ActionCreators =
         {
             return response.status === 200 
                 ? dispatch({ type: REMOVE_BOOKING_RESPONSE, isBookingRemoved: true })
-                : dispatch({ type: RAISE_ERROR, errorObject: response.status });
+                : dispatch({ type: RAISE_ERROR, errorObject: UnexpectedStatusCode(response.status) });
         })
         .catch(error => 
         {
