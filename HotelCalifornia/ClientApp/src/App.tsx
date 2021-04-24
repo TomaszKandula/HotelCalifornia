@@ -3,7 +3,7 @@ import MainPage from "./Pages/mainPage";
 import UserPage from "./Pages/userPage";
 import ManagerPage from "./Pages/managerPage";
 
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 
 export default function App() 
 {

@@ -1,10 +1,7 @@
-import { Button, Jumbotron, Nav } from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
-
 export default function MainPage() 
 {
     return (
-        <Jumbotron>
+        <div>
             <h1>Welcome to the Hotel California!</h1>
             <p>
                 This web site is an example of a web application requested by client.
@@ -33,19 +30,11 @@ export default function MainPage()
                 Enjoy!
             </p>
             <p>
-                <LinkContainer to="/user">
-                    <Nav.Link>
-                        <Button variant="primary">User page</Button>
-                    </Nav.Link>
-                </LinkContainer>
+
             </p>
             <p>
-                <LinkContainer to="/manager">
-                    <Nav.Link>
-                    <Button variant="secondary">Manager page</Button>
-                    </Nav.Link>
-                </LinkContainer>
+
             </p>
-        </Jumbotron>    
+        </div>
     );
 }
