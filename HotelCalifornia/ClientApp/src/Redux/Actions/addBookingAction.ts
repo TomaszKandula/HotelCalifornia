@@ -6,15 +6,18 @@ import { RAISE_ERROR, TErrorActions } from "./raiseErrorAction";
 
 export const ADD_BOOKING = "ADD_BOOKING";
 export const ADD_BOOKING_CLEAR = "ADD_BOOKING_CLEAR";
+export const ADD_BOOKING_ERROR = "ADD_BOOKING_ERROR";
 export const ADD_BOOKING_RESPONSE = "ADD_BOOKING_RESPONSE";
 
 export interface IAddBooking { type: typeof ADD_BOOKING }
 export interface IAddBookingClear { type: typeof ADD_BOOKING_CLEAR }
+export interface IAddBookingError { type: typeof ADD_BOOKING_ERROR }
 export interface IAddBookingResponse { type: typeof ADD_BOOKING_RESPONSE, hasAddedBooking: boolean }
 
 export type TKnownActions = 
     IAddBooking | 
     IAddBookingClear | 
+    IAddBookingError |
     IAddBookingResponse | 
     TErrorActions
 ;
@@ -49,6 +52,7 @@ export const ActionCreators =
         })
         .catch(error => 
         {
+            dispatch({ type: ADD_BOOKING_ERROR });
             dispatch({ type: RAISE_ERROR, errorObject: error });
         });
     }
