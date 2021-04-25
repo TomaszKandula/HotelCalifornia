@@ -1,8 +1,9 @@
 import { AddBookingDefault } from "./Defaults/addBookingDefault";
 import { GetAllBookingsDefault } from "./Defaults/getAllBookingsDefault";
 import { GetRoomsInfoDefault } from "./Defaults/getRoomsInfoDefault";
-import { RaiseErrorDefault } from "./Defaults/raiseErrorDefault";
 import { RemoveBookingDefault } from "./Defaults/removeBookingDefault";
+import { RaiseDialogDefault } from "./Defaults/raiseDialogDefault";
+import { RaiseErrorDefault } from "./Defaults/raiseErrorDefault";
 
 export const combinedDefaults = 
 {
@@ -10,5 +11,6 @@ export const combinedDefaults =
     getRoomsInfo: GetRoomsInfoDefault,
     addBooking: AddBookingDefault,
     removeBooking: RemoveBookingDefault,
-    raiseError: RaiseErrorDefault
+    raiseError: RaiseErrorDefault,
+    raiseDialog: RaiseDialogDefault
 }
