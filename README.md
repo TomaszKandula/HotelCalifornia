@@ -61,3 +61,7 @@ REACT_APP_BACKEND=http://localhost:5000
 ```
 
 Finally, run command `yarn start`. After successfull compilation application will start in a web browser.
+
+## End note
+
+This demo may be further extended beyond what the manager has requested.
