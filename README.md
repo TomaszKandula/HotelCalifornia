@@ -2,7 +2,7 @@
 
 ## Why has this demo been created?
 
-Credit Suisse manager has requested this web application demo. The request was to create an application that will help small private hotels let visitors book the rooms. The mandatory tech-stack was .NET Core (WebAPI with Swagger), React and Bootstrap.
+Undisclosed manager has requested this web application demo. The request was to create an application that will help small private hotels let visitors book the rooms. The mandatory tech-stack was .NET Core (WebAPI with Swagger), React and Bootstrap.
 
 ## The hotel
 
