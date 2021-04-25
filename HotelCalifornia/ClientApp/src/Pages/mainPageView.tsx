@@ -44,7 +44,7 @@ export const MainPageView = (props: IBinding) =>
                     <div style={{ marginTop: "30px" }}>
                         <h3>The hotel</h3>
                         <hr />
-                        <p>The hotel has ten rooms. Each room has a number from 1 to 10. 4 rooms have one bedroom, three rooms having two bedrooms, and three rooms with three bedrooms. Each room can be reserved for a minimum of one day.</p>
+                        <p>The hotel has ten rooms. Each room has a number from 1 to 10. Four rooms have one bedroom, three rooms with two bedrooms, and three bedrooms. Each room can be reserved for a minimum of one day.</p>
                     </div>
                     <div style={{ marginTop: "30px" }}>
                         <h3>Provided user stories</h3>
@@ -65,6 +65,7 @@ export const MainPageView = (props: IBinding) =>
                         <ul>
                             <li>React with TypeScript.</li>
                             <li>React-Bootstrap.</li>
+                            <li>Redux.</li>
                             <li>Axios.</li>
                             <li>Validate.js</li>
                             <li>Moment.js</li>
@@ -78,6 +79,8 @@ export const MainPageView = (props: IBinding) =>
                             <li>FluentValidation.</li>
                             <li>MediatR library.</li>
                             <li>Swagger-UI.</li>
+                            <li>Sentry.</li>
+                            <li>xUnit.</li>
                         </ul>
                     </div>
                     <div style={{ marginTop: "30px" }}>
