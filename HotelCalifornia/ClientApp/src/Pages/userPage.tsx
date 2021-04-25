@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IApplicationState } from "../Redux/applicationState";
-import { ActionCreators } from "../Redux/Actions/addBookingAction";
+import { ActionCreators as ActionCreatorsBooking } from "../Redux/Actions/addBookingAction";
+import { ActionCreators as ActionCreatorsDialog } from "../Redux/Actions/raiseDialogAction";
 import { IAddBookingDto } from "../Models";
 import { BookingError, BookingSuccess, BookingWarning } from "../Shared/textWrappers";
 import { IconType, OperationStatus } from "../Shared/enums";
 import { ValidateBookingForm } from "../Shared/validate";
-import { alertModalDefault } from "../Components/alertDialog";
 import { UserPageView } from "./userPageView";
 import Validate from "validate.js";
 
@@ -22,22 +22,26 @@ const formDefaultValues: IAddBookingDto =
 export default function UserPage() 
 {
     const [progress, setProgress] = React.useState(false);
-    const [modal, setModal] = React.useState(alertModalDefault);
     const [form, setForm] = React.useState(formDefaultValues);
 
-    const showSuccess = (text: string) => { setModal({ state: true, title: "Booking", message: text, icon: IconType.info }); };
-    const showWarning = (text: string) => { setModal({ state: true, title: "Warning", message: text, icon: IconType.warning }); };
-    const showError = (text: string) => { setModal({ state: true, title: "Error", message: text, icon: IconType.error }); };
-        
+    const dispatch = useDispatch();
     const addBookingState = useSelector((state: IApplicationState) => state.addBooking);
     const raiseErrorState = useSelector((state: IApplicationState) => state.raiseError);
-    const dispatch = useDispatch();
+
+    const showSuccess = React.useCallback((text: string) => 
+    { dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.info, title: "Info", message: text, isShown: true }))}, [ dispatch ]);
+    
+    const showWarning = React.useCallback((text: string) =>  
+    { dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.warning, title: "Warning", message: text, isShown: true })) }, [ dispatch ]);
+    
+    const showError = React.useCallback((text: string) => 
+    { dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.error, title: "Error", message: text, isShown: true })) }, [ dispatch ]);
 
     const addBooking = React.useCallback((payload: IAddBookingDto) => 
-    { dispatch(ActionCreators.addBooking(payload)); }, [ dispatch ]);
+    { dispatch(ActionCreatorsBooking.addBooking(payload)); }, [ dispatch ]);
 
     const addBookingClear = React.useCallback(() => 
-    { dispatch(ActionCreators.addBookingClear()); }, [ dispatch ]);
+    { dispatch(ActionCreatorsBooking.addBookingClear()); }, [ dispatch ]);
 
     React.useEffect(() => 
     {
@@ -76,12 +80,6 @@ export default function UserPage()
     const formHandler = (event: React.ChangeEvent<HTMLInputElement>) => 
     { setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value }); };
 
-    const modalHandler = () => 
-    { 
-        addBookingClear();
-        setModal({ ...modal, state: false }); 
-    };
-
     const buttonHandler = () => 
     {
         let results = ValidateBookingForm(form);
@@ -96,11 +94,6 @@ export default function UserPage()
 
     return(<UserPageView bind={ 
     { 
-        state: modal.state,
-        handle: modalHandler,
-        title: modal.title,
-        message: modal.message,
-        icon: modal.icon,
         formHandler: formHandler,
         buttonHandler: buttonHandler,
         guestFullName: form.GuestFullName,

@@ -1,7 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Container, Form, Row, Col, Card } from "react-bootstrap";
-import { AlertDialog } from "../Components/alertDialog";
-import { IconType } from "../Shared/enums";
 
 interface IBinding 
 {
@@ -10,11 +8,6 @@ interface IBinding
 
 interface IProperties
 {
-    state: boolean;
-    handle: any;
-    title: string;
-    message: string;
-    icon: IconType;
     formHandler: any;
     buttonHandler: any;
     guestFullName: string;
@@ -28,7 +21,6 @@ export const UserPageView = (props: IBinding) =>
 {
     return (
         <Container>
-            <AlertDialog state={props.bind.state} handle={props.bind.handle} title={props.bind.title} message={props.bind.message} icon={props.bind.icon} />
             <Row style={{ marginTop: "30px", marginBottom: "25px" }}>
                 <Col></Col>
                 <Col xs={6}>
