@@ -23,6 +23,7 @@ export const CustomColours =
     alerts: 
     {
         info: "#5BC0DE",
+        success: "#5CB85C",
         warning: "#F0AD4E",
         danger: "#D9534F"
     },
