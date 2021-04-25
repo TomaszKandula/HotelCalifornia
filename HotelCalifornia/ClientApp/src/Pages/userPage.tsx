@@ -69,10 +69,12 @@ export default function UserPage()
                 && addBookingState.isAddingBooking === OperationStatus.hasFinished)
             {
                 showSuccess(BookingSuccess());
+                addBookingClear();
                 return;
             }
 
             showError(BookingError(raiseErrorState.attachedErrorObject));
+            addBookingClear();
         }       
     }, 
     [ addBooking, addBookingClear, addBookingState, form, progress ]);
