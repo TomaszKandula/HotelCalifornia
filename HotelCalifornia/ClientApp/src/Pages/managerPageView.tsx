@@ -1,6 +1,7 @@
 import { Container, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { IGetAllBookings, IBookings } from "../Redux/States/getAllBookingsState";
+import Moment from "moment";
 
 interface IBinding 
 {
@@ -38,8 +39,8 @@ export const ManagerPageView = (props: IBinding) =>
                             <td>{item.guestPhoneNumber}</td>
                             <td>{item.roomNumber}</td>
                             <td>{item.bedrooms}</td>
-                            <td>{item.dateFrom}</td>
-                            <td>{item.dateTo}</td>
+                            <td>{Moment(item.dateFrom).format("YYYY-MM-DD")}</td>
+                            <td>{Moment(item.dateTo).format("YYYY-MM-DD")}</td>
                         </tr>
                     ))}
                 </tbody>
