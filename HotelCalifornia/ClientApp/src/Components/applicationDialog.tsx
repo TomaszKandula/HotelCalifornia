@@ -35,9 +35,9 @@ export const ApplicationDialog = () =>
             <AlertDialog 
                 state={state} 
                 handle={buttonHandler} 
-                title={raiseDialogState.title} 
-                message={raiseDialogState.message} 
-                icon={raiseDialogState.type} 
+                title={raiseDialogState?.title} 
+                message={raiseDialogState?.message} 
+                icon={raiseDialogState?.type} 
             />
         </>
     );

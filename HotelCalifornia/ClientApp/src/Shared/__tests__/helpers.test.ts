@@ -93,7 +93,7 @@ describe("Verify helper methods.", () =>
         }`
 
         const textObject: IErrorDto = JSON.parse(jsonObject) as IErrorDto;
-        const expectation: string = "Cannot add invalid data, " + VALIDATION_ERRORS;
+        const expectation: string = "Cannot add invalid data. " + VALIDATION_ERRORS;
 
         expect(helpers.GetErrorMessage(textObject)).toBe(expectation);
     });

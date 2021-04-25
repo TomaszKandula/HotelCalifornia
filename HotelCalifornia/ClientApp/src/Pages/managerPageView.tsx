@@ -25,12 +25,12 @@ export const ManagerPageView = (props: IBinding) =>
                 <h1>Active bookings</h1>
             </div>
             <div style={{ marginBottom: "25px" }}>
-                <Button variant="secondary" type="button" style={{ marginRight: "15px" }} onClick={props.bind.backButtonHandler} >Back</Button>
-                <Button variant="primary" type="button" style={{ marginRight: "15px" }} onClick={props.bind.refreshButtonHandler}>Refresh</Button>
+                <Button variant="secondary" type="button" style={{ marginRight: "15px" }} onClick={props.bind?.backButtonHandler} >Back</Button>
+                <Button variant="primary" type="button" style={{ marginRight: "15px" }} onClick={props.bind?.refreshButtonHandler}>Refresh</Button>
                 <Button variant="danger" type="button" onClick={props.bind.removeButtonHandler}>Cancel booking</Button>
             </div>
             <div style={{ marginBottom: "25px" }}>
-                Selection: {props.bind.bookingId}
+                Selection: {props.bind?.bookingId}
             </div>
             <Table striped bordered hover>
                 <thead>
@@ -45,15 +45,15 @@ export const ManagerPageView = (props: IBinding) =>
                     </tr>
                 </thead>
                 <tbody>
-                    {props.bind.data.bookings.map((item: IBookings, index: number) => ( 
-                        <tr key={index} data-key={item.id} onClick={props.bind.selectEventHandler}>
-                            <td>{item.id.substring(0,8)}</td>
-                            <td>{item.guestFullName}</td>
-                            <td>{item.guestPhoneNumber}</td>
-                            <td>{item.roomNumber}</td>
-                            <td>{item.bedrooms}</td>
-                            <td>{Moment(item.dateFrom).format("YYYY-MM-DD")}</td>
-                            <td>{Moment(item.dateTo).format("YYYY-MM-DD")}</td>
+                    {props.bind?.data.bookings.map((item: IBookings, index: number) => ( 
+                        <tr key={index} data-key={item?.id} onClick={props.bind?.selectEventHandler}>
+                            <td>{item?.id.substring(0,8)}</td>
+                            <td>{item?.guestFullName}</td>
+                            <td>{item?.guestPhoneNumber}</td>
+                            <td>{item?.roomNumber}</td>
+                            <td>{item?.bedrooms}</td>
+                            <td>{Moment(item?.dateFrom).format("YYYY-MM-DD")}</td>
+                            <td>{Moment(item?.dateTo).format("YYYY-MM-DD")}</td>
                         </tr>
                     ))}
                 </tbody>

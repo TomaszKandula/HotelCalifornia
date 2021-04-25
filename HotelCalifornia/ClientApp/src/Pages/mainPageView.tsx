@@ -19,7 +19,7 @@ export const MainPageView = (props: IBinding) =>
                 <p>Welcome to the Hotel California!</p>
                 <p>Such a lovely place, such a lovely rooms:</p>
                 <ul>
-                    {props.bind.roomsInfo.map((items: IRoomsInfo) => (
+                    {props.bind?.roomsInfo.map((items: IRoomsInfo) => (
                         <li key={items.id}>{items.info}</li>
                     ))}
                 </ul>
