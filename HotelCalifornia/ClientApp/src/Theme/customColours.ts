@@ -20,6 +20,12 @@ export const CustomColours =
         darkGray2: "#212121",
         black: "#000000"
     },
+    alerts: 
+    {
+        info: "#5BC0DE",
+        warning: "#F0AD4E",
+        danger: "#D9534F"
+    },
     application:
     {
         navigationBlue: "#1976D2"
