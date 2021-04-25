@@ -52,7 +52,7 @@ Unit tests are provided for backend and frontend. To run backend tests, use comm
 
 Clone repository and open with JetBrains Rider or Visual Studio 2019. 
 
-Copy below code from `application.Development.json` to **user secrets** and replace `set_env` values:
+Copy below code from `appsettings.Development.json` to **user secrets** and replace `set_env` values:
 
 ```
 "ConnectionStrings":
