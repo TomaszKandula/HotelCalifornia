@@ -36,6 +36,7 @@ Authorization and authentication are not needed for this application. There shou
 1. CQRS pattern with no event sourcing.
 1. SQL Database with EF Core.
 1. FluentValidation.
+1. FluentAssertions.
 1. MediatR library.
 1. Swagger-UI.
 1. Sentry.
