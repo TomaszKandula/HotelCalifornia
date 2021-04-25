@@ -30,7 +30,7 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
             var LRoomsInfo = new List<GetRoomsInfoQueryResult>();
             foreach (var LQueryResult in LQueryResults)
             {
-                var LSuffix = "";
+                var LSuffix = string.Empty;
                 if (LQueryResult.Bedrooms > 1)
                     LSuffix = PLURAL_SUFFIX;
                 
