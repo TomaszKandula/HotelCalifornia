@@ -82,7 +82,7 @@ const ValidateBookingForm = (props: IAddBookingDto): any =>
             exclusion:
             {
                 within: restrictedDates,
-                message: "must not be the same as starting date"
+                message: "must not be same as starting date"
             }
         }
     };
