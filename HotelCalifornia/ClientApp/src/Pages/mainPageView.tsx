@@ -1,7 +1,7 @@
 import { Button, Jumbotron, Row, Col, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { IGetRoomsInfo, IRoomsInfo } from "Redux/States/getRoomsInfoState";
-import { CustomColours } from "Theme/customColours";
+import { IGetRoomsInfo, IRoomsInfo } from "../Redux/States/getRoomsInfoState";
+import { CustomColours } from "../Theme/customColours";
 
 interface IBinding 
 {
