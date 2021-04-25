@@ -2,6 +2,7 @@ import { Action, Reducer } from "@reduxjs/toolkit";
 import { IGetAllBookings } from "../States/getAllBookingsState";
 import { combinedDefaults } from "../combinedDefaults";
 import { 
+    RESET_SELECTION,
     REQUEST_BOOKINGS, 
     RECEIVE_BOOKINGS, 
     TKnownActions 
@@ -14,6 +15,9 @@ export const GetAllBookingsReducer: Reducer<IGetAllBookings> = (state: IGetAllBo
     const action = incomingAction as TKnownActions;
     switch (action.type)
     {
+        case RESET_SELECTION:
+            return combinedDefaults.getAllBookings;
+
         case REQUEST_BOOKINGS:
             return { 
                 isLoading: true,

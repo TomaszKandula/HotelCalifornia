@@ -37,18 +37,14 @@ export default function ManagerPage()
 
     React.useEffect(() => 
     { 
-        if (remove && selection !== "n/a")
-        {
-            deleteBooking(selection);
-        }
-
+        if (remove && selection !== "n/a") deleteBooking(selection);
         setRemove(false);
     }, 
     [ deleteBooking, remove ]);
     
     const backButton = () => 
     {
-        //TODO: dispatch to clear booking list
+        dispatch(ActionCreatorsRequest.resetSelection());
         history.push("/");
     };
 
