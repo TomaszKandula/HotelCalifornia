@@ -77,6 +77,7 @@ export const MainPageView = (props: IBinding) =>
                             <li>CQRS pattern with no event sourcing.</li>
                             <li>SQL Database with EF Core.</li>
                             <li>FluentValidation.</li>
+                            <li>FluentAssertions.</li>
                             <li>MediatR library.</li>
                             <li>Swagger-UI.</li>
                             <li>Sentry.</li>
