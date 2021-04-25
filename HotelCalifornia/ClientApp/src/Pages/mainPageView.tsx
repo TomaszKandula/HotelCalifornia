@@ -20,7 +20,7 @@ export const MainPageView = (props: IBinding) =>
                 <p>Such a lovely place, such a lovely rooms:</p>
                 <ul>
                     {props.bind.roomsInfo.map((items: IRoomsInfo) => (
-                        <li>{items.info}</li>
+                        <li key={items.id}>{items.info}</li>
                     ))}
                 </ul>
                 <div style={{ marginTop: "35px" }}>
