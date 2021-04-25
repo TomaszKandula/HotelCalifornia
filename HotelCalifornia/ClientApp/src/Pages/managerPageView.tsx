@@ -5,7 +5,7 @@ import Moment from "moment";
 
 interface IBinding 
 {
-    bookings: IGetAllBookings;
+    bind: IGetAllBookings;
 }
 
 export const ManagerPageView = (props: IBinding) => 
@@ -32,7 +32,7 @@ export const ManagerPageView = (props: IBinding) =>
                     </tr>
                 </thead>
                 <tbody>
-                    {props.bookings.bookings.map((item: IBookings) => ( 
+                    {props.bind.bookings.map((item: IBookings) => ( 
                         <tr key={item.id}>
                             <td>{item.id.substring(0,8)}</td>
                             <td>{item.guestFullName}</td>

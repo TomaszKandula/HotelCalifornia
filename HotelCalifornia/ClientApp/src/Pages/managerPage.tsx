@@ -14,5 +14,5 @@ export default function ManagerPage()
     
     React.useEffect(() => { fetchData() }, [ fetchData ]);
 
-    return (<ManagerPageView bookings={data} />);
+    return (<ManagerPageView bind={data} />);
 }
