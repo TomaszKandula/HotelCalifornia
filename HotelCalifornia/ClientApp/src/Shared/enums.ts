@@ -8,7 +8,9 @@ export enum OperationStatus
 
 export enum IconType
 {
+    default,
     info,
+    success,
     warning,
     error,
 }
