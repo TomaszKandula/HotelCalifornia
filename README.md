@@ -6,7 +6,7 @@ Credit Suisse manager has requested this web application demo. The request was t
 
 ## The hotel
 
-The hotel has ten rooms. Each room has a number from 1 to 10. 4 rooms have one bedroom, three rooms having two bedrooms, and three rooms with three bedrooms. Each room can be reserved for a minimum of one day.
+The hotel has ten rooms. Each room has a number from 1 to 10. Four rooms have one bedroom, three rooms with two bedrooms, and three bedrooms. Each room can be reserved for a minimum of one day.
 
 ## Provided user stories
 
