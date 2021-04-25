@@ -31,16 +31,19 @@ export const alertModalDefault: IAlertModal =
 
 export function AlertDialog(props: IAlertDialog) 
 {
-    const RenderIcon = () => 
+    const RenderIcon = (): JSX.Element => 
     {
+        const iconSize = "36px";
         switch (props.icon)
         {
-            case IconType.info: return(<BsFillInfoCircleFill color={CustomColours.alerts.info} size="36px" />);
-            case IconType.warning: return(<BsExclamationTriangleFill color={CustomColours.alerts.warning} size="36px" />);
-            case IconType.error: return(<BsFillExclamationCircleFill color={CustomColours.alerts.danger} size="36px" />);
-            default: return(<BsFillInfoCircleFill color={CustomColours.alerts.info} size="36px" />);
+            case IconType.default: return(<div></div>);
+            case IconType.info: return(<BsFillInfoCircleFill color={CustomColours.alerts.info} size={iconSize} />);
+            case IconType.success: return(<BsFillInfoCircleFill color={CustomColours.alerts.success} size={iconSize} />);
+            case IconType.warning: return(<BsExclamationTriangleFill color={CustomColours.alerts.warning} size={iconSize} />);
+            case IconType.error: return(<BsFillExclamationCircleFill color={CustomColours.alerts.danger} size={iconSize} />);
+            default: return(<div></div>);
         }        
-    };   
+    };
 
     return (
         <Modal show={props.state} onHide={props.handle} backdrop="static" keyboard={false} >
