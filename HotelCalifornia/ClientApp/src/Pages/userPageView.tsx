@@ -1,9 +1,14 @@
 import { LinkContainer } from "react-router-bootstrap";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { AlertDialog } from "../Components/alertDialog";
-import { IconType } from "Shared/enums";
+import { IconType } from "../Shared/enums";
 
 interface IBinding 
+{
+    bind: IProperties;
+}
+
+interface IProperties
 {
     state: boolean;
     handle: any;
@@ -23,7 +28,7 @@ export const UserPageView = (props: IBinding) =>
 {
     return (
         <Container>
-            <AlertDialog state={props.state} handle={props.handle} title={props.title} message={props.message} icon={props.icon} />
+            <AlertDialog state={props.bind.state} handle={props.bind.handle} title={props.bind.title} message={props.bind.message} icon={props.bind.icon} />
             <Row>
                 <Col></Col>
                 <Col xs={6}>
@@ -33,32 +38,32 @@ export const UserPageView = (props: IBinding) =>
                     <Form>
                         <Form.Group controlId="formFullName">
                             <Form.Label>Full name:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter full name" value={props.guestFullName} onChange={props.formHandler} name="GuestFullName" />
+                            <Form.Control type="text" placeholder="Enter full name" value={props.bind.guestFullName} onChange={props.bind.formHandler} name="GuestFullName" />
                             <Form.Text className="text-muted">Maximum 255 characters.</Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formPhoneNumber">
                             <Form.Label>Phone number:</Form.Label>
-                            <Form.Control type="text" placeholder="Phone number" value={props.guestPhoneNumber} onChange={props.formHandler} name="GuestPhoneNumber" />
+                            <Form.Control type="text" placeholder="Phone number" value={props.bind.guestPhoneNumber} onChange={props.bind.formHandler} name="GuestPhoneNumber" />
                             <Form.Text className="text-muted">Maximum 12 digits.</Form.Text>
                         </Form.Group>
                        <Form.Group controlId="formBedrooms">
                             <Form.Label>Number of bedrooms:</Form.Label>
-                            <Form.Control type="number" placeholder="Bedroom(s)" value={props.bedroomsNumber} onChange={props.formHandler} name="BedroomsNumber" />
+                            <Form.Control type="number" placeholder="Bedroom(s)" value={props.bind.bedroomsNumber} onChange={props.bind.formHandler} name="BedroomsNumber" />
                             <Form.Text className="text-muted">Tell us how many beds do you need.</Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formDateFrom">
                             <Form.Label>Date from:</Form.Label>
-                            <Form.Control type="date" placeholder="" value={props.dateFrom} onChange={props.formHandler} name="DateFrom" />
+                            <Form.Control type="date" placeholder="" value={props.bind.dateFrom} onChange={props.bind.formHandler} name="DateFrom" />
                             <Form.Text className="text-muted">This is the day you arrive.</Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formDateTo">
                             <Form.Label>Date to:</Form.Label>
-                            <Form.Control type="date" placeholder="" value={props.dateTo} onChange={props.formHandler} name="DateTo" />
+                            <Form.Control type="date" placeholder="" value={props.bind.dateTo} onChange={props.bind.formHandler} name="DateTo" />
                             <Form.Text className="text-muted">This is the day you leave.</Form.Text>
                         </Form.Group>
                     </Form>
                     <div style={{ marginTop: "40px" }}>
-                        <Button variant="primary" type="button" onClick={props.buttonHandler} size="lg" block >
+                        <Button variant="primary" type="button" onClick={props.bind.buttonHandler} size="lg" block >
                             Book
                         </Button>
                         <LinkContainer to="/">

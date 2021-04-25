@@ -94,18 +94,19 @@ export default function UserPage()
         showWarning(BookingWarning(results));
     };
 
-    return(<UserPageView  
-        state={modal.state}
-        handle={modalHandler}
-        title={modal.title} 
-        message={modal.message} 
-        icon={modal.icon}
-        formHandler={formHandler}
-        buttonHandler={buttonHandler}
-        guestFullName={form.GuestFullName}
-        guestPhoneNumber={form.GuestPhoneNumber}
-        bedroomsNumber={form.BedroomsNumber}
-        dateFrom={form.DateFrom}
-        dateTo={form.DateTo}
-    />);
+    return(<UserPageView bind={ 
+    { 
+        state: modal.state,
+        handle: modalHandler,
+        title: modal.title,
+        message: modal.message,
+        icon: modal.icon,
+        formHandler: formHandler,
+        buttonHandler: buttonHandler,
+        guestFullName: form.GuestFullName,
+        guestPhoneNumber: form.GuestPhoneNumber,
+        bedroomsNumber: form.BedroomsNumber,
+        dateFrom: form.DateFrom,
+        dateTo: form.DateTo
+    }}/>);
 }
