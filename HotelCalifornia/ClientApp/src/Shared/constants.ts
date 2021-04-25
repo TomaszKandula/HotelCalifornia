@@ -17,3 +17,6 @@ export const VALIDATION_ERRORS = "Validation errors have been found";
 
 export const RECEIVED_ERROR_MESSAGE = "RECEIVED_ERROR_MESSAGE";
 export const NO_ERRORS = "NO_ERRORS";
+
+export const NOT_APPLICABLE = "n/a";
+export const REDIRECT_TO_MAIN = "/";
