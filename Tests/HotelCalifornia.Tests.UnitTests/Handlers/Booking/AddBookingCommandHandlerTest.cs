@@ -11,7 +11,7 @@ using HotelCalifornia.Backend.Domain.Entities;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
 
-namespace HotelCalifornia.Tests.UnitTests.Handlers
+namespace HotelCalifornia.Tests.UnitTests.Handlers.Booking
 {
     public class AddBookingCommandHandlerTest : TestBase
     {
