@@ -56,14 +56,14 @@ Copy below code from `appsettings.Development.json` to **user secrets** and repl
 
 ```
 "ConnectionStrings":
-  {
+{
     "DbConnect": "set_env"
-  },
-  "AppUrls":
-  {
+},
+"AppUrls":
+{
     "DevelopmentOrigin": "set_env",
     "DeploymentOrigin": "set_env"
-  }
+}
 ```
 
 For the deployment/development values, you can use `http://localhost:3000`. For the database, you can use your local SQL Express connection string (if so, you must migrate the database and seed test data). However, this application uses an in-memory database (with seeded data) for fast development; it is recommended to use it.
