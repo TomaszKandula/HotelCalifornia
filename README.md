@@ -52,7 +52,7 @@ Unit tests are provided for backend and frontend. To run backend tests, use comm
 
 Clone repository and open with JetBrains Rider or Visual Studio 2019. 
 
-Copy below code from `appsettings.Development.json` to **user secrets** and replace `set_env` values:
+Copy below code from `appsettings.Development.json` to **user secrets**: and replace `set_env` values:
 
 ```
 "ConnectionStrings":
@@ -66,9 +66,25 @@ Copy below code from `appsettings.Development.json` to **user secrets** and repl
 }
 ```
 
-For the deployment/development values, you can use `http://localhost:3000`. For the database, you can use your local SQL Express connection string (if so, you must migrate the database and seed test data). However, this application uses an in-memory database (with seeded data) for fast development; it is recommended to use it.
+### Origins
 
-Click **run**, web browser will be opened with Swagger UI, so the API can be also explored.
+Use `http://localhost:3000` or any other used by the frontend.
+
+### Development environment:
+
+If `set_env` remains unchanged, the application will use SQL database in-memory. However, suppose one is willing to use a local/remote SQL database. In that case, they should replace `set_env` with a valid connection string (note: application always uses in-memory database when the connection string is invalid). Application seeds test when the existing tables are not populated, and migration is performed only on the local/remote SQL database.
+
+### Manual migration
+
+Go to Package Manager Console (PMC) to execute following command:
+
+`Update-Database -StartupProject HotelCalifronia -Project HotelCalifronia.Backend.Database -Context DatabaseContext`
+
+EF Core will create all the necessary tables. More on migrations here: [HotelCalifornia.Backend.Database](https://github.com/TomaszKandula/HotelCalifornia/tree/master/Backend/HotelCalifornia.Backend.Database).
+
+### Running the backend
+
+If all has been setup, then click **run**, web browser will be opened with Swagger UI, so the API can be also explored.
 
 ### Frontend
 
