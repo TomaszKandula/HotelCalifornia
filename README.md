@@ -2,7 +2,7 @@
 
 ## Why has this demo been created?
 
-Credit Suisse manager has requested this web application demo. The request was to create an application that will help small private hotels let visitors book the rooms. The mandatory tech-stack was .NET Core (WebAPI with Swagger), React and Bootstrap.
+Undisclosed manager has requested this web application demo. The request was to create an application that will help small private hotels let visitors book the rooms. The mandatory tech-stack was .NET Core (WebAPI with Swagger), React and Bootstrap.
 
 ## The hotel
 
@@ -50,7 +50,25 @@ Unit tests are provided for backend and frontend. To run backend tests, use comm
 
 ### Backend
 
-Clone repository and open with JetBrains Rider or Visual Studio 2019. Click **run**, web browser will be opened with Swagger UI, so the API can be also explored.
+Clone repository and open with JetBrains Rider or Visual Studio 2019. 
+
+Copy below code from `appsettings.Development.json` to **user secrets** and replace `set_env` values:
+
+```
+"ConnectionStrings":
+{
+    "DbConnect": "set_env"
+},
+"AppUrls":
+{
+    "DevelopmentOrigin": "set_env",
+    "DeploymentOrigin": "set_env"
+}
+```
+
+For the deployment/development values, you can use `http://localhost:3000`. For the database, you can use your local SQL Express connection string (if so, you must migrate the database and seed test data). However, this application uses an in-memory database (with seeded data) for fast development; it is recommended to use it.
+
+Click **run**, web browser will be opened with Swagger UI, so the API can be also explored.
 
 ### Frontend
 
