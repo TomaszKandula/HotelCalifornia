@@ -50,6 +50,12 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking
                 .WithName(AAddBookingCommand => nameof(AAddBookingCommand.DateTo))
                 .WithErrorCode(nameof(ValidationCodes.END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE))
                 .WithMessage(ValidationCodes.END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE);
+            
+            RuleFor(AAddBookingCommand => new DateRangeValidator(AAddBookingCommand.DateFrom, AAddBookingCommand.DateTo))
+                .AreDatesSame()
+                .WithName(AAddBookingCommand => nameof(AAddBookingCommand.DateTo))
+                .WithErrorCode(nameof(ValidationCodes.START_DATE_AND_END_DATE_CANNOT_BE_SAME))
+                .WithMessage(ValidationCodes.START_DATE_AND_END_DATE_CANNOT_BE_SAME);
         }
     }
 }
