@@ -5,6 +5,5 @@ export const RaiseDialogDefault: IRaiseDialog =
 {
     type: IconType.default,
     title: "",
-    message: "",
-    isShown: false
+    message: ""
 }

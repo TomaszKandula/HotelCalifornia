@@ -21,8 +21,7 @@ export const RaiseDialogReducer: Reducer<IRaiseDialog> = (state: IRaiseDialog | 
             return {
                 type: action.dialog.type,
                 title: action.dialog.title,
-                message: action.dialog.message,
-                isShown: true
+                message: action.dialog.message
             }
 
         default: return state;

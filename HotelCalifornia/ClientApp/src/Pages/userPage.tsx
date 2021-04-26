@@ -29,19 +29,19 @@ export default function UserPage()
     const raiseErrorState = useSelector((state: IApplicationState) => state.raiseError);
 
     const showSuccess = React.useCallback((text: string) => 
-    { dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.info, title: "Info", message: text, isShown: true }))}, [ dispatch ]);
+    dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.info, title: "Info", message: text })), [ dispatch ]);
     
     const showWarning = React.useCallback((text: string) =>  
-    { dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.warning, title: "Warning", message: text, isShown: true })) }, [ dispatch ]);
+    dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.warning, title: "Warning", message: text })), [ dispatch ]);
     
     const showError = React.useCallback((text: string) => 
-    { dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.error, title: "Error", message: text, isShown: true })) }, [ dispatch ]);
+    dispatch(ActionCreatorsDialog.raiseDialog({ type: IconType.error, title: "Error", message: text })), [ dispatch ]);
 
     const addBooking = React.useCallback((payload: IAddBookingDto) => 
-    { dispatch(ActionCreatorsBooking.addBooking(payload)); }, [ dispatch ]);
+    dispatch(ActionCreatorsBooking.addBooking(payload)), [ dispatch ]);
 
     const addBookingClear = React.useCallback(() => 
-    { dispatch(ActionCreatorsBooking.addBookingClear()); }, [ dispatch ]);
+    dispatch(ActionCreatorsBooking.addBookingClear()), [ dispatch ]);
 
     React.useEffect(() => 
     {

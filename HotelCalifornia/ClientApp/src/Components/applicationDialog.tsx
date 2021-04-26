@@ -15,7 +15,7 @@ export const ApplicationDialog = () =>
     React.useEffect(() => 
     { 
         if (raiseDialogState === undefined) return;
-        if (raiseDialogState.isShown) setState(true); 
+        if (raiseDialogState.message !== "") setState(true); 
     }, 
     [ raiseDialogState ]);
 
