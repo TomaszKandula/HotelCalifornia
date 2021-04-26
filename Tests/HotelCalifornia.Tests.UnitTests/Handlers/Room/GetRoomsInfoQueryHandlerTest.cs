@@ -18,7 +18,7 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Room
         public GetRoomsInfoQueryHandlerTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public async Task GetAllBookings_ShouldReturnsCollection()
+        public async Task GetRoomsInfo_ShouldReturnsCollection()
         {
             // Arrange
             var LDatabaseContext = GetTestDatabaseContext();
@@ -64,7 +64,7 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Room
             // Assert
             LResults.Should().NotBeNull();
             LResults.Should().HaveCount(1);
-            LResults[0].Info.Should().Be("1 rooms with 3 bedrooms.");
+            LResults[0].Info.Should().Be("1 room with 3 bedrooms.");
         }
     }
 }

@@ -30,14 +30,19 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
             var LRoomsInfo = new List<GetRoomsInfoQueryResult>();
             foreach (var LQueryResult in LQueryResults)
             {
-                var LSuffix = string.Empty;
-                if (LQueryResult.Bedrooms > 1)
-                    LSuffix = PLURAL_SUFFIX;
+                var LBedroomSuffix = string.Empty;
+                var LRoomSuffix = string.Empty;
                 
+                if (LQueryResult.Bedrooms > 1)
+                    LBedroomSuffix = PLURAL_SUFFIX;
+                
+                if (LQueryResult.TotalRooms > 1)
+                    LRoomSuffix = PLURAL_SUFFIX;
+
                 LRoomsInfo.Add(new GetRoomsInfoQueryResult
                 {
                     Id = Guid.NewGuid(),
-                    Info = $"{LQueryResult.TotalRooms} rooms with {LQueryResult.Bedrooms} bedroom{LSuffix}."
+                    Info = $"{LQueryResult.TotalRooms} room{LRoomSuffix} with {LQueryResult.Bedrooms} bedroom{LBedroomSuffix}."
                 });
             }
 
