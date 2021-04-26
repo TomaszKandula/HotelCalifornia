@@ -18,15 +18,14 @@ export default function ManagerPage()
     const dispatch = useDispatch();
 
     const fetchData = React.useCallback(() => 
-    { dispatch(ActionCreatorsRequest.requestBooking()); }, [ dispatch ]);
+    dispatch(ActionCreatorsRequest.requestBooking()), [ dispatch ]);
  
     const deleteBooking = React.useCallback((bookingId: string) => 
-    { dispatch(ActionCreatorsRemove.removeBooking({ BookingId: bookingId })); }, [ dispatch ]);
+    dispatch(ActionCreatorsRemove.removeBooking({ BookingId: bookingId })), [ dispatch ]);
 
     React.useEffect(() => 
     { 
-        if (!data.isLoading && data.bookings.length === 0) 
-            fetchData(); 
+        if (!data.isLoading && data.bookings.length === 0) fetchData(); 
     }, 
     [ fetchData ]);
 
@@ -49,20 +48,9 @@ export default function ManagerPage()
     }, 
     [ deleteBooking, remove ]);
     
-    const backButton = () => 
-    {
-        history.push(REDIRECT_TO_MAIN);
-    };
-
-    const refreshButton = () => 
-    {
-        setReload(true);
-    };
-
-    const removeButton = () => 
-    {
-        setRemove(true);
-    };
+    const backButton = () => history.push(REDIRECT_TO_MAIN);
+    const refreshButton = () => setReload(true);
+    const removeButton = () => setRemove(true);
 
     const selectEvent = (event: React.MouseEvent<HTMLElement, MouseEvent>) => 
     {
