@@ -7,6 +7,7 @@ using HotelCalifornia.Backend.Cqrs;
 using HotelCalifornia.Backend.Database;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Core.Behaviours;
+using HotelCalifornia.Backend.Core.Extensions;
 using HotelCalifornia.Backend.Database.Initialize;
 using HotelCalifornia.Backend.Core.Services.AppLogger;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
@@ -29,6 +30,24 @@ namespace HotelCalifornia.Configuration
             SetupDatabaseForTest(AServices);
         }
 
+        public static void RegisterForDevelopment(IServiceCollection AServices, IConfiguration AConfiguration)
+        {
+            var LIsValidConnection = AConfiguration
+                .GetConnectionString("DbConnect")
+                .IsValidConnectionString();
+
+            if (!LIsValidConnection)
+            {
+                SetupDatabaseForTest(AServices);
+            }
+            else
+            {
+                SetupDatabase(AServices, AConfiguration);
+            }
+
+            CommonServices(AServices, AConfiguration);
+        }
+        
         private static void CommonServices(IServiceCollection AServices, IConfiguration AConfiguration)
         {
             SetupAppSettings(AServices, AConfiguration);

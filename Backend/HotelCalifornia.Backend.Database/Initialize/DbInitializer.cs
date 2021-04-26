@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HotelCalifornia.Backend.Database.Seeders;
 
@@ -9,9 +10,7 @@ namespace HotelCalifornia.Backend.Database.Initialize
         private readonly IServiceScopeFactory FScopeFactory;
 
         public DbInitializer(IServiceScopeFactory AScopeFactory)
-        {
-            FScopeFactory = AScopeFactory;
-        }
+            => FScopeFactory = AScopeFactory;
 
         public void StartMigration()
         {
@@ -19,20 +18,18 @@ namespace HotelCalifornia.Backend.Database.Initialize
             using var LDatabaseContext = LServiceScope.ServiceProvider.GetService<DatabaseContext>();
 
             if (LDatabaseContext?.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory") 
-            {
                 LDatabaseContext?.Database.Migrate();
-            }
         }
 
-        public void SeedData()
+        public async Task SeedData()
         {
             using var LServiceScope = FScopeFactory.CreateScope();
-            using var LDatabaseContext = LServiceScope.ServiceProvider.GetService<DatabaseContext>();
+            await using var LDatabaseContext = LServiceScope.ServiceProvider.GetService<DatabaseContext>();
 
             if (LDatabaseContext != null && !LDatabaseContext.Rooms.AnyAsync().GetAwaiter().GetResult())
                 LDatabaseContext.Rooms.AddRange(RoomsSeeder.SeedRooms());
 
-            LDatabaseContext?.SaveChanges();
+            await LDatabaseContext?.SaveChangesAsync();
         }
     }
 }
