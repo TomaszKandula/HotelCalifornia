@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using HotelCalifornia.Backend.Database;
+using HotelCalifornia.Backend.Shared.Dto.Room;
 
 namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
 {
@@ -21,14 +22,18 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
                 from LRooms in FDatabaseContext.Rooms
                 group LRooms by LRooms.Bedrooms
                 into LGrouping
-                select new
+                select new QueryRoomsInfoDto
                 {
                     Bedrooms = LGrouping.Key,
                     TotalRooms = LGrouping.Select(ARooms => ARooms.Bedrooms).Count()
                 };
 
-            var LRoomsInfo = new List<GetRoomsInfoQueryResult>();
-            foreach (var LQueryResult in LQueryResults)
+            return await Task.FromResult(GetRoomsInfo(LQueryResults));
+        }
+
+        private static IEnumerable<GetRoomsInfoQueryResult> GetRoomsInfo(IEnumerable<QueryRoomsInfoDto> AQueryResults)
+        {
+            foreach (var LQueryResult in AQueryResults)
             {
                 var LBedroomSuffix = string.Empty;
                 var LRoomSuffix = string.Empty;
@@ -39,14 +44,12 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking
                 if (LQueryResult.TotalRooms > 1)
                     LRoomSuffix = PLURAL_SUFFIX;
 
-                LRoomsInfo.Add(new GetRoomsInfoQueryResult
+                yield return new GetRoomsInfoQueryResult
                 {
                     Id = Guid.NewGuid(),
                     Info = $"{LQueryResult.TotalRooms} room{LRoomSuffix} with {LQueryResult.Bedrooms} bedroom{LBedroomSuffix}."
-                });
-            }
-
-            return await Task.FromResult(LRoomsInfo);
+                };
+            }            
         }
     }
 }
