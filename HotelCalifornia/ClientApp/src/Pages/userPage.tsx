@@ -68,7 +68,7 @@ export default function UserPage()
             if (addBookingState.hasAddedBooking 
                 && addBookingState.isAddingBooking === OperationStatus.hasFinished)
             {
-                showSuccess(BookingSuccess());
+                showSuccess(BookingSuccess(addBookingState.roomNumber));
                 addBookingClear();
                 return;
             }

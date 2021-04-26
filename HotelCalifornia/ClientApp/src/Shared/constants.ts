@@ -7,7 +7,7 @@ export const API_QUERY_GET_ROOMS = `${APP_BACKEND}/api/v${API_VER}/room/GetRooms
 export const API_COMMAND_ADD_BOOKING = `${APP_BACKEND}/api/v${API_VER}/booking/AddBooking`;
 export const API_COMMAND_REMOVE_BOOKING = `${APP_BACKEND}/api/v${API_VER}/booking/RemoveBooking`;
 
-export const BOOKING_SUCCESS = "<p>Congratulations!</p><p>Your room has been booked!</p>";
+export const BOOKING_SUCCESS = "<p>Congratulations!</p><p>Your room ({ROOM_NUMBER}) has been booked!</p>";
 export const BOOKING_WARNING = "<span>We cannot book your room, following warning(s) received:</span><ul>{LIST}</ul><span>Please make sure the fields are valid.</span>";
 export const BOOKING_ERROR = "<p>Upss!</p><p>We cannot book your room.</p><p>{ERROR}.</p>";
 

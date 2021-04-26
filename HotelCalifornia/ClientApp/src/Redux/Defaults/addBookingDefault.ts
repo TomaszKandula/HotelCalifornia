@@ -4,5 +4,6 @@ import { OperationStatus } from "../../Shared/enums";
 export const AddBookingDefault: IAddBooking = 
 {
     isAddingBooking: OperationStatus.notStarted,
-    hasAddedBooking: false
+    hasAddedBooking: false,
+    roomNumber: 0
 }

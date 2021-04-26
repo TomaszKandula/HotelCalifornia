@@ -23,19 +23,22 @@ export const AddBookingReducer: Reducer<IAddBooking> = (state: IAddBooking | und
         case ADD_BOOKING:
             return { 
                 isAddingBooking: OperationStatus.inProgress,
-                hasAddedBooking: state.hasAddedBooking 
+                hasAddedBooking: state.hasAddedBooking,
+                roomNumber: state.roomNumber 
             };
 
         case ADD_BOOKING_RESPONSE: 
             return { 
                 isAddingBooking: OperationStatus.hasFinished,
-                hasAddedBooking: action.hasAddedBooking 
+                hasAddedBooking: action.hasAddedBooking,
+                roomNumber: action.payload.roomNumber
             };
 
         case ADD_BOOKING_ERROR:
             return { 
                 isAddingBooking: OperationStatus.hasFailed,
-                hasAddedBooking: false 
+                hasAddedBooking: false,
+                roomNumber: 0 
             };
 
         default: return state;

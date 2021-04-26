@@ -10,14 +10,14 @@ using HotelCalifornia.Backend.Shared.Resources;
 
 namespace HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking
 {
-    public class AddBookingCommandHandler : TemplateHandler<AddBookingCommand, Guid>
+    public class AddBookingCommandHandler : TemplateHandler<AddBookingCommand, AddBookingCommandResult>
     {
         private readonly DatabaseContext FDatabaseContext;
         
         public AddBookingCommandHandler(DatabaseContext ADatabaseContext) 
             => FDatabaseContext = ADatabaseContext;
 
-        public override async Task<Guid> Handle(AddBookingCommand ARequest, CancellationToken ACancellationToken)
+        public override async Task<AddBookingCommandResult> Handle(AddBookingCommand ARequest, CancellationToken ACancellationToken)
         {
             var LRoomsWithBedrooms = await FDatabaseContext.Rooms
                 .Where(ARooms => ARooms.Bedrooms == ARequest.BedroomsNumber)
@@ -54,7 +54,17 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking
             
             FDatabaseContext.Bookings.Add(LNewBooking);
             await FDatabaseContext.SaveChangesAsync(ACancellationToken);
-            return await Task.FromResult(LNewBooking.Id);
+
+            var LRoomNumber = await FDatabaseContext.Rooms
+                .Where(ARooms => ARooms.Id == LNewBooking.RoomId)
+                .Select(ARooms => ARooms.RoomNumber)
+                .SingleOrDefaultAsync(cancellationToken: ACancellationToken);
+            
+            return new AddBookingCommandResult
+            {
+                Id = LNewBooking.Id,
+                RoomNumber = LRoomNumber
+            };
         }
     }
 }

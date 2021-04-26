@@ -1,10 +1,10 @@
-using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;
-using HotelCalifornia.Backend.Cqrs.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using HotelCalifornia.Backend.Cqrs.Mappers;
 using HotelCalifornia.Backend.Shared.Dto.Booking;
+using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
+using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;
 using MediatR;
 
 namespace HotelCalifornia.Controllers
@@ -18,7 +18,7 @@ namespace HotelCalifornia.Controllers
             => await FMediator.Send(new GetAllBookingsQuery());
         
         [HttpPost]
-        public async Task<Guid> AddBooking([FromBody] AddBookingDto APayLoad)
+        public async Task<AddBookingCommandResult> AddBooking([FromBody] AddBookingDto APayLoad)
             =>  await FMediator.Send(BookingMapper.MapToAddBookingCommand(APayLoad));
 
         [HttpPost]

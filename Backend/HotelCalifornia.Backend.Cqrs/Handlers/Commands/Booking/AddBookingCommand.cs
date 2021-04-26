@@ -3,7 +3,7 @@ using MediatR;
 
 namespace HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking
 {
-    public class AddBookingCommand : IRequest<Guid>
+    public class AddBookingCommand : IRequest<AddBookingCommandResult>
     {
         public string GuestFullName { get; set; }
 

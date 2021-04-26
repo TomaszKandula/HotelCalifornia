@@ -8,9 +8,9 @@ import {
 
 // BOOKINGS
 
-const BookingSuccess = (): string =>
+const BookingSuccess = (roomNumber: number): string =>
 {
-    return BOOKING_SUCCESS;
+    return BOOKING_SUCCESS.replace("{ROOM_NUMBER}", roomNumber.toString());
 }
 
 const BookingWarning = (object: any): string =>

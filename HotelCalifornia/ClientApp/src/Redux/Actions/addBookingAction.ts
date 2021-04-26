@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AppThunkAction } from "../applicationState";
-import { IAddBookingDto } from "../../Models";
+import { IAddBookingDto, IAddBookingResultDto } from "../../Models";
 import { API_COMMAND_ADD_BOOKING } from "../../Shared/constants";
 import { UnexpectedStatusCode } from "../../Shared/textWrappers";
 import { GetErrorMessage } from "../../Shared/helpers";
@@ -14,7 +14,7 @@ export const ADD_BOOKING_RESPONSE = "ADD_BOOKING_RESPONSE";
 export interface IAddBooking { type: typeof ADD_BOOKING }
 export interface IAddBookingClear { type: typeof ADD_BOOKING_CLEAR }
 export interface IAddBookingError { type: typeof ADD_BOOKING_ERROR }
-export interface IAddBookingResponse { type: typeof ADD_BOOKING_RESPONSE, hasAddedBooking: boolean }
+export interface IAddBookingResponse { type: typeof ADD_BOOKING_RESPONSE, payload: IAddBookingResultDto, hasAddedBooking: boolean }
 
 export type TKnownActions = 
     IAddBooking | 
@@ -49,7 +49,7 @@ export const ActionCreators =
         .then(response => 
         {
             return response.status === 200 
-                ? dispatch({ type: ADD_BOOKING_RESPONSE, hasAddedBooking: true })
+                ? dispatch({ type: ADD_BOOKING_RESPONSE, payload: response.data , hasAddedBooking: true })
                 : dispatch({ type: RAISE_ERROR, errorObject: UnexpectedStatusCode(response.status) });
         })
         .catch(error => 
