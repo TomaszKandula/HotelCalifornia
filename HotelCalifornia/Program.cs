@@ -1,17 +1,42 @@
+using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Events;
 
 namespace HotelCalifornia
 {
     public class Program
     {
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        private static IWebHostBuilder CreateWebHostBuilder(string[] AArgs) =>
+            WebHost.CreateDefaultBuilder(AArgs)
+                .UseStartup<Startup>()
+                .UseSerilog((AContext, AConfig) =>
+                {
+                    AConfig.ReadFrom.Configuration(AContext.Configuration);
+                    AConfig.WriteTo.Console();
+                    AConfig.MinimumLevel.Information();
+                    AConfig.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
+                    AConfig.Enrich.FromLogContext();
+                });
 
-        public static void Main(string[] args)
+        public static int Main(string[] AArgs)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                Log.Information("Starting WebHost...");
+                CreateWebHostBuilder(AArgs).Build().Run();
+                return 0;
+            }
+            catch (Exception LException)
+            {
+                Log.Fatal(LException, "WebHost has been terminated unexpectedly");
+                return 1;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
     }
 }
