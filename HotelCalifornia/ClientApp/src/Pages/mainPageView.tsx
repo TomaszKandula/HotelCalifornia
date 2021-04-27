@@ -39,7 +39,7 @@ export const MainPageView = (props: IBinding) =>
                     <div style={{ marginTop: "0px" }}>
                         <h3>Why has this demo been created?</h3>
                         <hr />
-                        <p>Credit Suisse manager has requested this web application demo. The request was to create an application that will help small private hotels let visitors book the rooms. The mandatory tech-stack was .NET Core (WebAPI with Swagger), React and Bootstrap.</p>
+                        <p>Undisclosed manager has requested this web application demo. The request was to create an application that will help small private hotels let visitors book the rooms. The mandatory tech-stack was .NET Core (WebAPI with Swagger), React and Bootstrap.</p>
                     </div>
                     <div style={{ marginTop: "30px" }}>
                         <h3>The hotel</h3>
@@ -80,7 +80,7 @@ export const MainPageView = (props: IBinding) =>
                             <li>FluentAssertions.</li>
                             <li>MediatR library.</li>
                             <li>Swagger-UI.</li>
-                            <li>Sentry.</li>
+                            <li>SeriLog.</li>
                             <li>xUnit.</li>
                         </ul>
                     </div>
