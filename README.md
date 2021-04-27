@@ -39,7 +39,7 @@ Authorization and authentication are not needed for this application. There shou
 1. FluentAssertions.
 1. MediatR library.
 1. Swagger-UI.
-1. Sentry.
+1. SeriLog.
 1. xUnit.  
 
 ## Unit tests
