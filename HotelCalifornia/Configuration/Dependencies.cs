@@ -38,14 +38,11 @@ namespace HotelCalifornia.Configuration
 
             if (!LIsValidConnection)
             {
-                SetupDatabaseForTest(AServices);
-            }
-            else
-            {
-                SetupDatabase(AServices, AConfiguration);
+                RegisterForTests(AServices, AConfiguration);
+                return;
             }
 
-            CommonServices(AServices, AConfiguration);
+            Register(AServices, AConfiguration);
         }
         
         private static void CommonServices(IServiceCollection AServices, IConfiguration AConfiguration)
