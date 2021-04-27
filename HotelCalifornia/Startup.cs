@@ -12,6 +12,7 @@ using HotelCalifornia.CustomHandlers;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Shared.Environment;
 using HotelCalifornia.Backend.Database.Initialize;
+using Serilog;
 
 namespace HotelCalifornia
 {
@@ -73,6 +74,9 @@ namespace HotelCalifornia
                 LDatabaseInitializer?.SeedData();
             }
 
+            if (!EnvironmentVariables.IsStaging())
+                AApplication.UseSerilogRequestLogging();
+            
             AApplication.UseExceptionHandler(ExceptionHandler.Handle);
             AApplication.UseMiddleware<GarbageCollector>();
             AApplication.UseMiddleware<CustomCors>();
