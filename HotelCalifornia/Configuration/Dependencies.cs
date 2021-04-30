@@ -99,5 +99,6 @@ namespace HotelCalifornia.Configuration
 
             AServices.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
             AServices.AddScoped(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
-        }    }
+        }    
+    }
 }
