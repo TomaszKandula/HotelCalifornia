@@ -23,7 +23,6 @@ namespace HotelCalifornia.CustomHandlers
                 string LResult;
                 switch (LErrorException)
                 {
-
                     case ValidationException LException:
                     {
                         var LAppError = new ApplicationError(LException.ErrorCode, LException.Message, LException.ValidationResult);
@@ -47,7 +46,6 @@ namespace HotelCalifornia.CustomHandlers
                         AHttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                     }
-
                 }
 
                 CorsHeaders.Ensure(AHttpContext);
