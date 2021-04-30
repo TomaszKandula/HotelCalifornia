@@ -20,10 +20,10 @@ export type TKnownActions =
 
 export const ActionCreators = 
 {
-    removeBooking: (payload: IRemoveBookingDto):  AppThunkAction<TKnownActions> => async (dispatch) => 
+    removeBooking: (payload: IRemoveBookingDto):  AppThunkAction<TKnownActions> => (dispatch) => 
     {
         dispatch({ type: REMOVE_BOOKING });
-        await axios(
+        axios(
         { 
             method: "POST", 
             url: API_COMMAND_REMOVE_BOOKING, 

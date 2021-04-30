@@ -26,14 +26,14 @@ export type TKnownActions =
 
 export const ActionCreators = 
 {
-    addBookingClear: ():  AppThunkAction<TKnownActions> => async (dispatch) => 
+    addBookingClear: ():  AppThunkAction<TKnownActions> => (dispatch) => 
     {
         dispatch({ type: ADD_BOOKING_CLEAR });
     },    
-    addBooking: (payload: IAddBookingDto):  AppThunkAction<TKnownActions> => async (dispatch) => 
+    addBooking: (payload: IAddBookingDto):  AppThunkAction<TKnownActions> => (dispatch) => 
     {
         dispatch({ type: ADD_BOOKING });
-        await axios(
+        axios(
         { 
             method: "POST", 
             url: API_COMMAND_ADD_BOOKING, 

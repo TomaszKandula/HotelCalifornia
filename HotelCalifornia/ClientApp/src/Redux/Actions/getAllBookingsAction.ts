@@ -20,10 +20,10 @@ export type TKnownActions =
 
 export const ActionCreators = 
 {
-    requestBooking: ():  AppThunkAction<TKnownActions> => async (dispatch) => 
+    requestBooking: ():  AppThunkAction<TKnownActions> => (dispatch) => 
     {
         dispatch({ type: REQUEST_BOOKINGS });
-        await axios(
+        axios(
         { 
             method: "GET", 
             url: API_QUERY_GET_BOOKINGS

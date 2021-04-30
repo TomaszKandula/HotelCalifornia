@@ -20,10 +20,10 @@ export type TKnownActions =
 
 export const ActionCreators = 
 {
-    requestRoomsInfo: ():  AppThunkAction<TKnownActions> => async (dispatch) => 
+    requestRoomsInfo: ():  AppThunkAction<TKnownActions> => (dispatch) => 
     {
         dispatch({ type: REQUEST_ROOMSINFO });
-        await axios(
+        axios(
         { 
             method: "GET", 
             url: API_QUERY_GET_ROOMS
