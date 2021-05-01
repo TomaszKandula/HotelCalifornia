@@ -195,6 +195,118 @@ public class GetRoomsInfoQueryHandler : TemplateHandler<GetRoomsInfoQuery, IEnum
 }
 ```
 
+## Exception Handler
+
+After adding custom exception handler to the middleware pipeline:
+
+```csharp
+AApplication.UseExceptionHandler(ExceptionHandler.Handle);
+```
+
+It will catch exceptions and sets HTTP status: bad request (400) or internal server error (500). Thus, if we throw an error (business or validation) manually in the handler, the response is appropriately set up.
+
+```csharp
+public static class ExceptionHandler
+{
+    public static void Handle(IApplicationBuilder AApplication)
+    {
+        AApplication.Run(async AHttpContext => 
+        {
+            var LExceptionHandlerPathFeature = AHttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            var LErrorException = LExceptionHandlerPathFeature.Error;
+            AHttpContext.Response.ContentType = "application/json";
+
+            string LResult;
+            switch (LErrorException)
+            {
+                case ValidationException LException:
+                {
+                    var LAppError = new ApplicationError(LException.ErrorCode, LException.Message, LException.ValidationResult);
+                    LResult = JsonConvert.SerializeObject(LAppError);
+                    AHttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    break;
+                }
+
+                case BusinessException LException:
+                {
+                    var LAppError = new ApplicationError(LException.ErrorCode, LException.Message);
+                    LResult = JsonConvert.SerializeObject(LAppError);
+                    AHttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    break;
+                }
+
+                default:
+                {
+                    var LAppError = new ApplicationError(nameof(ErrorCodes.ERROR_UNEXPECTED), ErrorCodes.ERROR_UNEXPECTED);
+                    LResult = JsonConvert.SerializeObject(LAppError);
+                    AHttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    break;
+                }
+            }
+
+            CorsHeaders.Ensure(AHttpContext);
+            await AHttpContext.Response.WriteAsync(LResult);
+        });
+    }
+}
+```
+
+Please note that handlers usually contains manual business exceptions while having validation exceptions very rarely as they are typically raised by the `FluentValidation` before handler is invoked, an example being:
+
+```csharp
+public override async Task<AddBookingCommandResult> Handle(AddBookingCommand ARequest, CancellationToken ACancellationToken)
+{
+    var LRoomsWithBedrooms = await FDatabaseContext.Rooms
+        .Where(ARooms => ARooms.Bedrooms == ARequest.BedroomsNumber)
+        .Select(ARoom => ARoom.Id)
+        .ToListAsync(ACancellationToken);
+
+    if (!LRoomsWithBedrooms.Any())
+        throw new BusinessException(
+            nameof(ErrorCodes.REQUESTED_BEDROOMS_UNAVAILABLE),
+            ErrorCodes.REQUESTED_BEDROOMS_UNAVAILABLE);
+            
+    var LRoomsTaken = await FDatabaseContext.Bookings
+        .Where(ABookings => LRoomsWithBedrooms.Contains(ABookings.RoomId) 
+            && ABookings.DateFrom == ARequest.DateFrom 
+            && ABookings.DateTo == ARequest.DateTo)
+        .Select(ABookings => ABookings.RoomId)
+        .ToListAsync(ACancellationToken);
+
+    var LFreeSlots = LRoomsWithBedrooms.Except(LRoomsTaken).ToList();
+            
+    if (!LFreeSlots.Any())
+        throw new BusinessException(nameof(
+            ErrorCodes.NO_AVAILABLE_ROOMS), 
+            ErrorCodes.NO_AVAILABLE_ROOMS);
+
+    var LNewBooking = new Bookings
+    {
+        RoomId = LFreeSlots.First(),
+        GuestFullName = ARequest.GuestFullName,
+        GuestPhoneNumber = ARequest.GuestPhoneNumber,
+        DateFrom = ARequest.DateFrom,
+        DateTo = ARequest.DateTo
+    };
+
+    FDatabaseContext.Bookings.Add(LNewBooking);
+    await FDatabaseContext.SaveChangesAsync(ACancellationToken);
+
+    var LRoomNumber = await FDatabaseContext.Rooms
+        .Where(ARooms => ARooms.Id == LNewBooking.RoomId)
+        .Select(ARooms => ARooms.RoomNumber)
+        .SingleOrDefaultAsync(cancellationToken: ACancellationToken);
+            
+    return new AddBookingCommandResult
+    {
+        Id = LNewBooking.Id,
+        RoomNumber = LRoomNumber
+    };
+}
+```
+
+These business exceptions (`REQUESTED_BEDROOMS_UNAVAILABLE` and `NO_AVAILABLE_ROOMS`) shall never be validation errors (invoked by `FluentValidation`). Furthermore, it is unlikely that we would want to perform database requests during validation. The validator is responsible for ensuring that input data is valid (not for checking available rooms etc.).
+
 ## How to run?
 
 ### Backend
