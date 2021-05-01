@@ -145,7 +145,7 @@ public async Task<IEnumerable<GetRoomsInfoQueryResult>> GetRoomsInfo()
     => await FMediator.Send(new GetRoomsInfoQuery());
 ```
 
-When we call `GetRoomsInfo` endpoint, it sends `GetRoomsInfoQuery` request with given parameters. The appropiate handler is `GetRoomsInfoQueryHandler`:
+When we call `GetRoomsInfo` endpoint, it sends `GetRoomsInfoQuery` request with given parameters. The appropriate handler is `GetRoomsInfoQueryHandler`:
 
 ```csharp
 public class GetRoomsInfoQueryHandler : TemplateHandler<GetRoomsInfoQuery, IEnumerable<GetRoomsInfoQueryResult>>
