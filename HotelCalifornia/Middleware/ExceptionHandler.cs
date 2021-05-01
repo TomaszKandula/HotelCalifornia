@@ -8,7 +8,7 @@ using HotelCalifornia.Backend.Core.Exceptions;
 using HotelCalifornia.Backend.Shared.Resources;
 using Newtonsoft.Json;
 
-namespace HotelCalifornia.CustomHandlers
+namespace HotelCalifornia.Middleware
 {
     public static class ExceptionHandler
     {

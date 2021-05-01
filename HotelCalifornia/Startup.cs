@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.ResponseCompression;
 using HotelCalifornia.Middleware;
 using HotelCalifornia.Configuration;
-using HotelCalifornia.CustomHandlers;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Shared.Environment;
 using HotelCalifornia.Backend.Database.Initialize;
