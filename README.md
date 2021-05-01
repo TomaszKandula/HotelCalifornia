@@ -135,7 +135,7 @@ public Task<TResponse> Handle(TRequest ARequest, CancellationToken ACancellation
 }
 ```
 
-Validator is registered within the middleware pipeline, and if it exists (not null), then we execute it and raise an exception if invalid, otherwise we proceed. Note: `ValidationException.cs` inherits from `BusinessException.cs` which inherits form System.Exception.
+Validator is registered within the middleware pipeline, and if it exists (not null), then we execute it and raise an exception if invalid, otherwise we proceed. Note: `ValidationException.cs` inherits from `BusinessException.cs` which inherits form `System.Exception`.
 
 Such setup allow to have very thin controllers, example endpoint:
 
@@ -151,6 +151,7 @@ When we call `GetRoomsInfo` endpoint, it sends `GetRoomsInfoQuery` request with 
 public class GetRoomsInfoQueryHandler : TemplateHandler<GetRoomsInfoQuery, IEnumerable<GetRoomsInfoQueryResult>>
 {
     private const string PLURAL_SUFFIX = "s";
+    
     private readonly DatabaseContext FDatabaseContext;
 
     public GetRoomsInfoQueryHandler(DatabaseContext ADatabaseContext)
