@@ -72,7 +72,7 @@ _Tests_
 | HotelCalifornia.Tests.TestData | Test helpers |
 | HotelCalifornia.Tests.UnitTests | Handlers and validators tests |
 
-Unit tests are provided for backend and frontend. To run backend tests, use command `dotnet test`.
+To run backend tests, use command `dotnet test`.
 
 ## CQRS
 
@@ -169,6 +169,27 @@ public class GetRoomsInfoQueryHandler : TemplateHandler<GetRoomsInfoQuery, IEnum
             };
 
         return await Task.FromResult(GetRoomsInfo(LQueryResults));
+    }
+
+    private static IEnumerable<GetRoomsInfoQueryResult> GetRoomsInfo(IEnumerable<QueryRoomsInfoDto> AQueryResults)
+    {
+        foreach (var LQueryResult in AQueryResults)
+        {
+            var LBedroomSuffix = string.Empty;
+            var LRoomSuffix = string.Empty;
+                
+            if (LQueryResult.Bedrooms > 1)
+                LBedroomSuffix = PLURAL_SUFFIX;
+               
+            if (LQueryResult.TotalRooms > 1)
+                LRoomSuffix = PLURAL_SUFFIX;
+
+            yield return new GetRoomsInfoQueryResult
+            {
+                Id = Guid.NewGuid(),
+                Info = $"{LQueryResult.TotalRooms} room{LRoomSuffix} with {LQueryResult.Bedrooms} bedroom{LBedroomSuffix}."
+            };
+        }            
     }
 }
 ```
