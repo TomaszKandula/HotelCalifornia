@@ -42,9 +42,157 @@ Authorization and authentication are not needed for this application. There shou
 1. SeriLog.
 1. xUnit.  
 
-## Unit tests
+## Project structure
 
-Unit tests are provided for backend and frontend. To run backend tests, use command `dotnet test`; for frontend test, use command `yarn test`.
+_HotelCalifornia_
+
+| Folder | Description |
+|--------|-------------|
+| ClientApp | Frontend in React^ |
+| Configuration | Application dependencies |
+| Controllers | WebAPI |
+| Middleware | Custom middleware |
+
+^Unit tests are provided; use command `yarn test` to run all tests.
+
+_Backend_
+
+| Folder | Description |
+|--------|-------------|
+| HotelCalifornia.Backend.Core | Reusable core elements |
+| HotelCalifornia.Backend.Cqrs | Handlers, mappers and related services |
+| HotelCalifornia.Backend.Database | Database context |
+| HotelCalifornia.Backend.Domain | Domain entities |
+| HotelCalifornia.Backend.Shared | Shared models and resources |
+
+_Tests_
+
+| Folder | Description |
+|--------|-------------|
+| HotelCalifornia.Tests.TestData | Test helpers |
+| HotelCalifornia.Tests.UnitTests | Handlers and validators tests |
+
+To run backend tests, use command `dotnet test`.
+
+## CQRS
+
+The project uses a CQRS architectural pattern with no event sourcing (changes to the application state are **not** stored as a sequence of events). I used the MediatR library (mediator pattern) with the handler template.
+
+The file `TemplateHandler.cs` presented below allow easy registration (mapping the handlers).
+
+```csharp
+public abstract class TemplateHandler<TRequest, TResult> : IRequestHandler<TRequest, TResult> where TRequest : IRequest<TResult>
+{
+    protected TemplateHandler() { }
+
+    public abstract Task<TResult> Handle(TRequest ARequest, CancellationToken ACancellationToken);
+}
+```
+
+To configure it, in `Dependencies.cs` (registered at startup), we invoke:
+
+```csharp
+private static void SetupMediatR(IServiceCollection AServices) 
+{
+    AServices.AddMediatR(AOption => AOption.AsScoped(), 
+        typeof(TemplateHandler<IRequest, Unit>).GetTypeInfo().Assembly);
+
+    AServices.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+    AServices.AddScoped(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
+}
+```
+
+The two additional lines register both `LoggingBehaviour` and `FluentValidationBehavior` as scoped services. Thus we not only log event before and after handler execution, but also we perform validation of payload before executing the handler.
+
+`LoggingBehaviour.cs`:
+
+```csharp
+public async Task<TResponse> Handle(TRequest ARequest, CancellationToken ACancellationToken, RequestHandlerDelegate<TResponse> ANext)
+{
+    FLogger.LogInfo($"Begin: Handle {typeof(TRequest).Name}");
+    var LResponse = await ANext();
+    FLogger.LogInfo($"Finish: Handle {typeof(TResponse).Name}");
+    return LResponse;
+}
+```
+
+Logging is part of the middleware pipeline, and as said, we log info before and after handler execution.
+
+`FluentValidationBehavior.cs`:
+
+```csharp
+public Task<TResponse> Handle(TRequest ARequest, CancellationToken ACancellationToken, RequestHandlerDelegate<TResponse> ANext)
+{
+    if (FValidator == null) return ANext();
+
+    var LValidationContext = new ValidationContext<TRequest>(ARequest);
+    var LValidationResults = FValidator.Validate(LValidationContext);
+
+    if (!LValidationResults.IsValid)
+        throw new ValidationException(LValidationResults);
+
+    return ANext();
+}
+```
+
+Validator is registered within the middleware pipeline, and if it exists (not null), then we execute it and raise an exception if invalid, otherwise we proceed. Note: `ValidationException.cs` inherits from `BusinessException.cs` which inherits form System.Exception.
+
+Such setup allow to have very thin controllers, example endpoint:
+
+```csharp
+[HttpGet]
+public async Task<IEnumerable<GetRoomsInfoQueryResult>> GetRoomsInfo()
+    => await FMediator.Send(new GetRoomsInfoQuery());
+```
+
+When we call `GetRoomsInfo` endpoint, it sends `GetRoomsInfoQuery` request with given parameters. The appropiate handler is `GetRoomsInfoQueryHandler`:
+
+```csharp
+public class GetRoomsInfoQueryHandler : TemplateHandler<GetRoomsInfoQuery, IEnumerable<GetRoomsInfoQueryResult>>
+{
+    private const string PLURAL_SUFFIX = "s";
+    private readonly DatabaseContext FDatabaseContext;
+
+    public GetRoomsInfoQueryHandler(DatabaseContext ADatabaseContext)
+        => FDatabaseContext = ADatabaseContext;
+
+    public override async Task<IEnumerable<GetRoomsInfoQueryResult>> Handle(GetRoomsInfoQuery ARequest, CancellationToken ACancellationToken)
+    {
+        var LQueryResults =
+            from LRooms in FDatabaseContext.Rooms
+            group LRooms by LRooms.Bedrooms
+            into LGrouping
+            select new QueryRoomsInfoDto
+            {
+                Bedrooms = LGrouping.Key,
+                TotalRooms = LGrouping.Select(ARooms => ARooms.Bedrooms).Count()
+            };
+
+        return await Task.FromResult(GetRoomsInfo(LQueryResults));
+    }
+
+    private static IEnumerable<GetRoomsInfoQueryResult> GetRoomsInfo(IEnumerable<QueryRoomsInfoDto> AQueryResults)
+    {
+        foreach (var LQueryResult in AQueryResults)
+        {
+            var LBedroomSuffix = string.Empty;
+            var LRoomSuffix = string.Empty;
+                
+            if (LQueryResult.Bedrooms > 1)
+                LBedroomSuffix = PLURAL_SUFFIX;
+               
+            if (LQueryResult.TotalRooms > 1)
+                LRoomSuffix = PLURAL_SUFFIX;
+
+            yield return new GetRoomsInfoQueryResult
+            {
+                Id = Guid.NewGuid(),
+                Info = $"{LQueryResult.TotalRooms} room{LRoomSuffix} with {LQueryResult.Bedrooms} bedroom{LBedroomSuffix}."
+            };
+        }            
+    }
+}
+```
 
 ## How to run?
 
