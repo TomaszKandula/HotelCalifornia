@@ -8,11 +8,11 @@ namespace HotelCalifornia.Tests.TestData
     {
 		private static readonly Random FRandom = new Random();
 
-		public static int GetRandomInt(int AMin = 0, int AMax = 12) => 
-			FRandom.Next(AMin, AMax + 1);
+		public static int GetRandomInt(int AMin = 0, int AMax = 12) 
+			=> FRandom.Next(AMin, AMax + 1);
 
-		public static string GetRandomEmail(int ALength = 12, string ADomain = "gmail.com") =>  
-			$"{GetRandomString(ALength)}@{ADomain}";
+		public static string GetRandomEmail(int ALength = 12, string ADomain = "gmail.com") 
+			=>  $"{GetRandomString(ALength)}@{ADomain}";
 
 		public static decimal GetRandomDecimal(int AMin = 0, int AMax = 9999)
 			=> FRandom.Next(AMin, AMax);
@@ -32,12 +32,9 @@ namespace HotelCalifornia.Tests.TestData
 
 			return LString;
 		}
-
+	    
 		public static MemoryStream GetRandomStreamData(int ASizeInKb = 12)
-		{
-			var LByteBuffer = GetRandomByteArray(ASizeInKb);
-			return new MemoryStream(LByteBuffer);
-		}
+			=> new MemoryStream(GetRandomByteArray(ASizeInKb));
 
 		public static DateTime GetRandomDate(DateTime? AMin = null, DateTime? AMax = null, int ADefaultYear = 2020)
 		{
