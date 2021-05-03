@@ -18,7 +18,7 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Room
         public GetRoomsInfoQueryHandlerTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public async Task GetRoomsInfo_ShouldReturnsCollection()
+        public async Task WhenGetRoomsInfo_ShouldReturnsCollection()
         {
             // Arrange
             var LDatabaseContext = GetTestDatabaseContext();

@@ -9,7 +9,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
     public class RemoveBookingCommandHandlerTest
     {
         [Fact]
-        public void RemoveArticle_WhenIdIsCorrect_ShouldFinishSuccessfully() 
+        public void GivenCorrectId_WhenRemoveArticle_ShouldFinishSuccessfully() 
         {
             // Arrange
             var LRemoveBookingCommand = new RemoveBookingCommand
@@ -26,7 +26,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         }
 
         [Fact]
-        public void RemoveArticle_WhenIdIsIncorrect_ShouldThrowError()
+        public void GivenIncorrectId_WhenRemoveArticle_ShouldThrowError()
         {
             // Arrange
             var LRemoveArticleCommand = new RemoveBookingCommand

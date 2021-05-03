@@ -18,7 +18,7 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Booking
         public GetAllBookingsQueryHandlerTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public async Task GetAllBookings_ShouldReturnsCollection()
+        public async Task WhenGetAllBookings_ShouldReturnsCollection()
         {
             // Arrange
             var LDatabaseContext = GetTestDatabaseContext();

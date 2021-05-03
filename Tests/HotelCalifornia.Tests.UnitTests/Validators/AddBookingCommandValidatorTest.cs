@@ -24,7 +24,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         public AddBookingCommandValidatorTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public void AddBooking_WhenAllFieldsAreCorrect_ShouldSucceed()
+        public void GivenAllFieldsAreCorrect_WhenAddBooking_ShouldSucceed()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -45,7 +45,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         }
         
         [Fact]
-        public void AddBooking_WhenNoGuestFullNameAndPhoneNumberProvided_ShouldThrowError()
+        public void GivenNoGuestFullNameAndPhoneNumberProvided_WhenAddBooking_ShouldThrowError()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -68,7 +68,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         }
 
         [Fact]
-        public void AddBooking_WhenGuestFullNameTooLong_ShouldThrowError()
+        public void GivenGuestFullNameTooLong_WhenAddBooking_ShouldThrowError()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -90,7 +90,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         }
         
         [Fact]
-        public void AddBooking_WhenGuestPhoneNumberTooLong_ShouldThrowError()
+        public void GivenGuestPhoneNumberTooLong_WhenAddBooking_ShouldThrowError()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -112,7 +112,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         }
 
         [Fact]
-        public void AddBooking_WhenBedroomsNumberIsWrong_ShouldThrowError()
+        public void GivenBedroomsNumberIsWrong_WhenAddBooking_ShouldThrowError()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -135,7 +135,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         
         [Theory]
         [ClassData(typeof(DateTimeTestCases))]
-        public void AddBooking_WhenDateFromAndDateToAreSame_ShouldThrowError(DateTime ADateFrom, DateTime ADateTo, TestCaseDays ACase)
+        public void GivenDateFromAndDateToAreSame_WhenAddBooking_ShouldThrowError(DateTime ADateFrom, DateTime ADateTo, TestCaseDays ACase)
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -167,7 +167,7 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
         }
         
         [Fact]
-        public void AddBooking_WhenDateToIsEarlierThanDateFrom_ShouldThrowError()
+        public void GivenDateToIsEarlierThanDateFrom_WhenAddBooking_ShouldThrowError()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand

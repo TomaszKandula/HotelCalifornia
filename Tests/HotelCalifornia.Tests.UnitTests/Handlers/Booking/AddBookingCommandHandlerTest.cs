@@ -20,7 +20,7 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Booking
         public AddBookingCommandHandlerTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public async Task AddBooking_WhenAllDataProvided_ShouldAddEntity()
+        public async Task GivenAllDataProvided_WhenAddBooking_ShouldAddEntity()
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand

@@ -17,7 +17,7 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Booking
         public RemoveBookingCommandHandlerTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public async Task RemoveBooking_WhenIdIsCorrect_ShouldSucceed()
+        public async Task GivenCorrectId_WhenRemoveBooking_ShouldSucceed()
         {
             // Arrange
             var LDatabaseContext = GetTestDatabaseContext();
