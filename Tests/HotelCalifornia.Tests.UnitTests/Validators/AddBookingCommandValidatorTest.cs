@@ -1,15 +1,25 @@
 using Xunit;
 using FluentAssertions;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using HotelCalifornia.Tests.TestData;
+using HotelCalifornia.Backend.Shared.Resources;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
-using HotelCalifornia.Backend.Shared.Resources;
 
 namespace HotelCalifornia.Tests.UnitTests.Validators
 {
     public class AddBookingCommandValidatorTest
     {
         private readonly DateTimeService FDateTimeService;
+
+        public enum TestCaseDays 
+        {
+            Present,
+            Past,
+            Future
+        }
 
         public AddBookingCommandValidatorTest() => FDateTimeService = new DateTimeService();
 
@@ -123,8 +133,9 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             LResult.Errors[0].ErrorCode.Should().Be(nameof(ValidationCodes.LESS_THAN_ZERO));
         }
         
-        [Fact]
-        public void AddBooking_WhenDateFromAndDateToAreSame_ShouldThrowError()
+        [Theory]
+        [ClassData(typeof(DateTimeTestCases))]
+        public void AddBooking_WhenDateFromAndDateToAreSame_ShouldThrowError(DateTime ADateFrom, DateTime ADateTo, TestCaseDays ACase)
         {
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
@@ -132,8 +143,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
                 GuestFullName = DataProvider.GetRandomString(),
                 GuestPhoneNumber = DataProvider.GetRandomString(9),
                 BedroomsNumber = 1,
-                DateFrom = FDateTimeService.Now,
-                DateTo = FDateTimeService.Now
+                DateFrom = ADateFrom,
+                DateTo = ADateTo
             };
 
             // Act
@@ -141,8 +152,18 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             var LResult = LValidator.Validate(LAddBookingCommand);
 
             // Assert
-            LResult.Errors.Count.Should().Be(1);
-            LResult.Errors[0].ErrorCode.Should().Be(nameof(ValidationCodes.START_DATE_AND_END_DATE_CANNOT_BE_SAME));
+            if (ACase is TestCaseDays.Present or TestCaseDays.Future) 
+            {
+                LResult.Errors.Count.Should().Be(1);
+                LResult.Errors[0].ErrorCode.Should().Be(nameof(ValidationCodes.START_DATE_AND_END_DATE_CANNOT_BE_SAME));
+            }
+            else
+            {
+                LResult.Errors.Count.Should().Be(3);
+                LResult.Errors[0].ErrorCode.Should().Be(nameof(ValidationCodes.START_DATE_CANNOT_BE_EARLIER_THAN_TODAY));
+                LResult.Errors[1].ErrorCode.Should().Be(nameof(ValidationCodes.END_DATE_CANNOT_BE_EARLIER_THAN_TODAY));
+                LResult.Errors[2].ErrorCode.Should().Be(nameof(ValidationCodes.START_DATE_AND_END_DATE_CANNOT_BE_SAME));
+            }
         }
         
         [Fact]
@@ -168,5 +189,18 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             LResult.Errors[1].ErrorCode.Should().Be(nameof(ValidationCodes.END_DATE_CANNOT_BE_EARLIER_THAN_STAR_DATE));
         }
         
+        private class DateTimeTestCases : IEnumerable<object[]>
+        {
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            private readonly DateTimeService FDateTimeService = new();
+            
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                yield return new object[] { FDateTimeService.Now, FDateTimeService.Now, TestCaseDays.Present };
+                yield return new object[] { FDateTimeService.Now.AddDays(-1), FDateTimeService.Now.AddDays(-1), TestCaseDays.Past };
+                yield return new object[] { FDateTimeService.Now.AddDays(1), FDateTimeService.Now.AddDays(1), TestCaseDays.Future };
+            }
+        }
     }
 }
