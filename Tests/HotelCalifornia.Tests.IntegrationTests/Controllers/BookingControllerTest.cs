@@ -82,6 +82,36 @@ namespace HotelCalifornia.Tests.IntegrationTests.Controllers
         }
 
         [Fact]
+        public async Task GivenTooManyBedrooms_WhenAddBooking_ShouldThrowError()
+        {
+            // Arrange
+            const string REQUEST = "/api/v1/booking/addbooking/";
+            var LNewRequest = new HttpRequestMessage(HttpMethod.Post, REQUEST);
+
+            var LPayLoad = new AddBookingDto
+            {
+                GuestFullName = DataProvider.GetRandomString(),
+                GuestPhoneNumber = "48111222333",
+                BedroomsNumber = DataProvider.GetRandomInt(10, 100),
+                DateFrom = FDateTimeService.Now,
+                DateTo = FDateTimeService.Now.AddDays(1)
+            };
+
+            var LHttpClient = FWebAppFactory.CreateClient();
+            LNewRequest.Content = new StringContent(JsonConvert.SerializeObject(LPayLoad), System.Text.Encoding.Default, "application/json");
+            
+            // Act
+            var LResponse = await LHttpClient.SendAsync(LNewRequest);
+            
+            // Assert
+            LResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            var LContent = await LResponse.Content.ReadAsStringAsync();
+            LContent.Should().NotBeNullOrEmpty();
+            LContent.Should().Contain(ErrorCodes.REQUESTED_BEDROOMS_UNAVAILABLE);
+        }
+        
+        [Fact]
         public async Task GivenNonExistingBookingId_WhenRemoveBooking_ShouldThrowError()
         {
             // Arrange
