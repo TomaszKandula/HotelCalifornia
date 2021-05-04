@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Sha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F732002F-CE4E-478A-9416-22D18412A2B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Tests.TestData", "Tests\HotelCalifornia.Tests.TestData\HotelCalifornia.Tests.TestData.csproj", "{2E64AE31-214A-493E-A028-C45B73BB40AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Tests.DataProviders", "Tests\HotelCalifornia.Tests.DataProviders\HotelCalifornia.Tests.DataProviders.csproj", "{2E64AE31-214A-493E-A028-C45B73BB40AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Tests.UnitTests", "Tests\HotelCalifornia.Tests.UnitTests\HotelCalifornia.Tests.UnitTests.csproj", "{7AF7A0EE-1230-4BC2-A186-8A7ECC36A495}"
 EndProject

@@ -3,7 +3,7 @@ using FluentAssertions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HotelCalifornia.Tests.TestData;
+using HotelCalifornia.Tests.DataProviders;
 using HotelCalifornia.Backend.Shared.Resources;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
@@ -29,8 +29,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
             {
-                GuestFullName = DataProvider.GetRandomString(),
-                GuestPhoneNumber = DataProvider.GetRandomString(9),
+                GuestFullName = StringProvider.GetRandomString(),
+                GuestPhoneNumber = StringProvider.GetRandomString(9),
                 BedroomsNumber = 1,
                 DateFrom = FDateTimeService.Now.AddDays(10),
                 DateTo = FDateTimeService.Now.AddDays(20)
@@ -73,8 +73,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
             {
-                GuestFullName = DataProvider.GetRandomString(300),
-                GuestPhoneNumber = DataProvider.GetRandomString(9),
+                GuestFullName = StringProvider.GetRandomString(300),
+                GuestPhoneNumber = StringProvider.GetRandomString(9),
                 BedroomsNumber = 1,
                 DateFrom = FDateTimeService.Now.AddDays(10),
                 DateTo = FDateTimeService.Now.AddDays(20)
@@ -95,8 +95,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
             {
-                GuestFullName = DataProvider.GetRandomString(),
-                GuestPhoneNumber = DataProvider.GetRandomString(15),
+                GuestFullName = StringProvider.GetRandomString(),
+                GuestPhoneNumber = StringProvider.GetRandomString(15),
                 BedroomsNumber = 1,
                 DateFrom = FDateTimeService.Now.AddDays(10),
                 DateTo = FDateTimeService.Now.AddDays(20)
@@ -117,8 +117,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
             {
-                GuestFullName = DataProvider.GetRandomString(),
-                GuestPhoneNumber = DataProvider.GetRandomString(9),
+                GuestFullName = StringProvider.GetRandomString(),
+                GuestPhoneNumber = StringProvider.GetRandomString(9),
                 BedroomsNumber = -10,
                 DateFrom = FDateTimeService.Now.AddDays(10),
                 DateTo = FDateTimeService.Now.AddDays(20)
@@ -140,8 +140,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
             {
-                GuestFullName = DataProvider.GetRandomString(),
-                GuestPhoneNumber = DataProvider.GetRandomString(9),
+                GuestFullName = StringProvider.GetRandomString(),
+                GuestPhoneNumber = StringProvider.GetRandomString(9),
                 BedroomsNumber = 1,
                 DateFrom = ADateFrom,
                 DateTo = ADateTo
@@ -172,8 +172,8 @@ namespace HotelCalifornia.Tests.UnitTests.Validators
             // Arrange
             var LAddBookingCommand = new AddBookingCommand
             {
-                GuestFullName = DataProvider.GetRandomString(),
-                GuestPhoneNumber = DataProvider.GetRandomString(9),
+                GuestFullName = StringProvider.GetRandomString(),
+                GuestPhoneNumber = StringProvider.GetRandomString(9),
                 BedroomsNumber = 1,
                 DateFrom = FDateTimeService.Now.AddDays(1),
                 DateTo = FDateTimeService.Now.AddDays(-10)

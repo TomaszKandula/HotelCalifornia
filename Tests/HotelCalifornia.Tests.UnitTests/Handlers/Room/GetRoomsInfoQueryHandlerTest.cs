@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using HotelCalifornia.Tests.TestData;
+using HotelCalifornia.Tests.DataProviders;
 using HotelCalifornia.Backend.Domain.Entities;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;
@@ -38,16 +38,16 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Room
                 new Bookings
                 {
                     RoomId = LRoom.Id,
-                    GuestFullName = DataProvider.GetRandomString(),
-                    GuestPhoneNumber = DataProvider.GetRandomString(9),
+                    GuestFullName = StringProvider.GetRandomString(),
+                    GuestPhoneNumber = StringProvider.GetRandomString(9),
                     DateFrom = FDateTimeService.Now.AddDays(5),
                     DateTo = FDateTimeService.Now.AddDays(15)
                 },
                 new Bookings
                 {
                     RoomId = LRoom.Id,
-                    GuestFullName = DataProvider.GetRandomString(),
-                    GuestPhoneNumber = DataProvider.GetRandomString(9),
+                    GuestFullName = StringProvider.GetRandomString(),
+                    GuestPhoneNumber = StringProvider.GetRandomString(9),
                     DateFrom = FDateTimeService.Now.AddDays(1),
                     DateTo = FDateTimeService.Now.AddDays(3)
                 }

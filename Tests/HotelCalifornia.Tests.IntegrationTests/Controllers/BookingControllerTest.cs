@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using HotelCalifornia.Tests.TestData;
+using HotelCalifornia.Tests.DataProviders;
 using HotelCalifornia.Backend.Core.Extensions;
 using HotelCalifornia.Backend.Shared.Resources;
 using HotelCalifornia.Backend.Shared.Dto.Booking;
@@ -58,9 +58,9 @@ namespace HotelCalifornia.Tests.IntegrationTests.Controllers
 
             var LPayLoad = new AddBookingDto
             {
-                GuestFullName = DataProvider.GetRandomString(),
+                GuestFullName = StringProvider.GetRandomString(),
                 GuestPhoneNumber = "48111222333",
-                BedroomsNumber = DataProvider.GetRandomInt(1, 3),
+                BedroomsNumber = NumberProvider.GetRandomInteger(1, 3),
                 DateFrom = FDateTimeService.Now,
                 DateTo = FDateTimeService.Now.AddDays(1)
             };
@@ -91,9 +91,9 @@ namespace HotelCalifornia.Tests.IntegrationTests.Controllers
 
             var LPayLoad = new AddBookingDto
             {
-                GuestFullName = DataProvider.GetRandomString(),
+                GuestFullName = StringProvider.GetRandomString(),
                 GuestPhoneNumber = "48111222333",
-                BedroomsNumber = DataProvider.GetRandomInt(10, 100),
+                BedroomsNumber = NumberProvider.GetRandomInteger(10, 100),
                 DateFrom = FDateTimeService.Now,
                 DateTo = FDateTimeService.Now.AddDays(1)
             };

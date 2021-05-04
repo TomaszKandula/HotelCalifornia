@@ -15,7 +15,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Backend\HotelCalifornia.Backend.Cqrs\HotelCalifornia.Backend.Cqrs.csproj" />
       <ProjectReference Include="..\..\Backend\HotelCalifornia.Backend.Database\HotelCalifornia.Backend.Database.csproj" />
-      <ProjectReference Include="..\HotelCalifornia.Tests.TestData\HotelCalifornia.Tests.TestData.csproj" />
+      <ProjectReference Include="..\HotelCalifornia.Tests.DataProviders\HotelCalifornia.Tests.DataProviders.csproj" />
     </ItemGroup>
 
 </Project>
