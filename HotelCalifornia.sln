@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Tests.DataP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Tests.UnitTests", "Tests\HotelCalifornia.Tests.UnitTests\HotelCalifornia.Tests.UnitTests.csproj", "{7AF7A0EE-1230-4BC2-A186-8A7ECC36A495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Tests.IntegrationTests", "Tests\HotelCalifornia.Tests.IntegrationTests\HotelCalifornia.Tests.IntegrationTests.csproj", "{179BD683-F00C-4F1E-B822-E2B582DA6AA5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,10 +58,6 @@ Global
 		{7AF7A0EE-1230-4BC2-A186-8A7ECC36A495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AF7A0EE-1230-4BC2-A186-8A7ECC36A495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AF7A0EE-1230-4BC2-A186-8A7ECC36A495}.Release|Any CPU.Build.0 = Release|Any CPU
-		{179BD683-F00C-4F1E-B822-E2B582DA6AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{179BD683-F00C-4F1E-B822-E2B582DA6AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{179BD683-F00C-4F1E-B822-E2B582DA6AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{179BD683-F00C-4F1E-B822-E2B582DA6AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A425E495-68BC-4AD3-9789-CC04606F3A0B} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
@@ -73,6 +67,5 @@ Global
 		{C9C3E541-C5CC-4013-947D-98D022AD07E8} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
 		{2E64AE31-214A-493E-A028-C45B73BB40AC} = {F732002F-CE4E-478A-9416-22D18412A2B3}
 		{7AF7A0EE-1230-4BC2-A186-8A7ECC36A495} = {F732002F-CE4E-478A-9416-22D18412A2B3}
-		{179BD683-F00C-4F1E-B822-E2B582DA6AA5} = {F732002F-CE4E-478A-9416-22D18412A2B3}
 	EndGlobalSection
 EndGlobal

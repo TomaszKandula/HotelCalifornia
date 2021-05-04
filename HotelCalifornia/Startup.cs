@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using HotelCalifornia.Middleware;
 using HotelCalifornia.Configuration;
 using HotelCalifornia.Backend.Shared.Settings;
-using HotelCalifornia.Backend.Shared.Environment;
 using HotelCalifornia.Backend.Database.Initialize;
 using Serilog;
 
@@ -41,11 +40,6 @@ namespace HotelCalifornia
             AServices.AddSpaStaticFiles(AOptions => AOptions.RootPath = "ClientApp/build");
             AServices.AddResponseCompression(AOptions => AOptions.Providers.Add<GzipCompressionProvider>());
             
-            // For E2E testing only when application is bootstrapped in memory
-            if (EnvironmentVariables.IsStaging())
-                Dependencies.RegisterForTests(AServices, FConfiguration);
-            
-            // Local development
             if (FEnvironment.IsDevelopment())
             {
                 Dependencies.RegisterForDevelopment(AServices, FConfiguration);
@@ -54,7 +48,6 @@ namespace HotelCalifornia
                     AOption.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelCaliforniaApi", Version = "v1" }));
             }
 
-            // Production and Staging (deployment slots only)
             if (!FEnvironment.IsProduction() && !FEnvironment.IsStaging()) 
                 return;
 
@@ -67,15 +60,13 @@ namespace HotelCalifornia
             using var LScope = LScopeFactory.CreateScope();
             var LDatabaseInitializer = LScope.ServiceProvider.GetService<IDbInitializer>();
 
-            if (FEnvironment.IsDevelopment() || EnvironmentVariables.IsStaging())
+            if (FEnvironment.IsDevelopment())
             {
                 LDatabaseInitializer?.StartMigration();
                 LDatabaseInitializer?.SeedData();
             }
 
-            if (!EnvironmentVariables.IsStaging())
-                AApplication.UseSerilogRequestLogging();
-            
+            AApplication.UseSerilogRequestLogging();
             AApplication.UseExceptionHandler(ExceptionHandler.Handle);
             AApplication.UseMiddleware<GarbageCollector>();
             AApplication.UseMiddleware<CustomCors>();
