@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using HotelCalifornia.Tests.TestData;
+using HotelCalifornia.Backend.Core.Extensions;
 using HotelCalifornia.Backend.Shared.Resources;
 using HotelCalifornia.Backend.Shared.Dto.Booking;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
@@ -78,7 +79,7 @@ namespace HotelCalifornia.Tests.IntegrationTests.Controllers
 
             var LDeserialized = JsonConvert.DeserializeObject<AddBookingCommandResult>(LContent);
             LDeserialized.RoomNumber.Should().BeGreaterThan(0);
-            GuidTest.Check(LDeserialized.Id.ToString()).Should().BeTrue();
+            LDeserialized.Id.ToString().IsGuid().Should().BeTrue();
         }
 
         [Fact]
