@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ using Serilog;
 
 namespace HotelCalifornia
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IConfiguration FConfiguration;
