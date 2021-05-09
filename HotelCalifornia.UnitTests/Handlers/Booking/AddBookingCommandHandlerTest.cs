@@ -40,8 +40,7 @@ namespace HotelCalifornia.UnitTests.Handlers.Booking
             await LAddBookingCommandHandler.Handle(LAddBookingCommand, CancellationToken.None);
 
             // Assert
-            var LAssertDbContext = GetTestDatabaseContext();
-            var LBookingEntity = LAssertDbContext.Bookings.ToList();
+            var LBookingEntity = LDatabaseContext.Bookings.ToList();
             LBookingEntity.Should().HaveCount(1);
             LBookingEntity[0].GuestFullName.Should().Be(LAddBookingCommand.GuestFullName);
             LBookingEntity[0].GuestPhoneNumber.Should().Be(LAddBookingCommand.GuestPhoneNumber);
