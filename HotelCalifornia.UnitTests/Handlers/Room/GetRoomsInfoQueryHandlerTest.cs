@@ -9,7 +9,7 @@ using HotelCalifornia.Backend.Domain.Entities;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;
 
-namespace HotelCalifornia.Tests.UnitTests.Handlers.Room
+namespace HotelCalifornia.UnitTests.Handlers.Room
 {
     public class GetRoomsInfoQueryHandlerTest : TestBase
     {

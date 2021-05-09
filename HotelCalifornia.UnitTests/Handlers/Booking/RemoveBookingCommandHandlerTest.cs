@@ -1,28 +1,27 @@
 using Xunit;
 using FluentAssertions;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using HotelCalifornia.Backend.Core.Generators;
 using HotelCalifornia.Backend.Domain.Entities;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
-using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;
+using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
 
-namespace HotelCalifornia.Tests.UnitTests.Handlers.Booking
+namespace HotelCalifornia.UnitTests.Handlers.Booking
 {
-    public class GetAllBookingsQueryHandlerTest : TestBase
+    public class RemoveBookingCommandHandlerTest : TestBase
     {
         private readonly DateTimeService FDateTimeService;
 
-        public GetAllBookingsQueryHandlerTest() => FDateTimeService = new DateTimeService();
+        public RemoveBookingCommandHandlerTest() => FDateTimeService = new DateTimeService();
 
         [Fact]
-        public async Task WhenGetAllBookings_ShouldReturnsCollection()
+        public async Task GivenCorrectId_WhenRemoveBooking_ShouldSucceed()
         {
             // Arrange
             var LDatabaseContext = GetTestDatabaseContext();
-            var LGetAllBookingsQueryHandler = new GetAllBookingsQueryHandler(LDatabaseContext);
+            var LRemoveBookingCommandHandler = new RemoveBookingCommandHandler(LDatabaseContext);
            
             var LRoom = new Rooms
             {
@@ -55,15 +54,18 @@ namespace HotelCalifornia.Tests.UnitTests.Handlers.Booking
 
             await LDatabaseContext.Bookings.AddRangeAsync(LBookings);
             await LDatabaseContext.SaveChangesAsync();
+
+            var LBookingOne = LBookings[0].Id;
+            var LBookingTwo = LBookings[1].Id;
             
             // Act
-            var LResults = (await LGetAllBookingsQueryHandler
-                .Handle(new GetAllBookingsQuery(), CancellationToken.None))
-                .ToList();
-            
+            await LRemoveBookingCommandHandler
+                .Handle(new RemoveBookingCommand {Id = LBookingTwo}, CancellationToken.None);      
+
             // Assert
-            LResults.Should().NotBeNull();
-            LResults.Should().HaveCount(2);
+            var LAssertDbContext = GetTestDatabaseContext();
+            var LArticlesEntity = await LAssertDbContext.Bookings.FindAsync(LBookingTwo);
+            LArticlesEntity.Should().BeNull();            
         }
     }
 }

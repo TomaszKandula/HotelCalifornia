@@ -8,7 +8,7 @@ using HotelCalifornia.Backend.Shared.Resources;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
 
-namespace HotelCalifornia.Tests.UnitTests.Validators
+namespace HotelCalifornia.UnitTests.Validators
 {
     public class AddBookingCommandValidatorTest
     {
