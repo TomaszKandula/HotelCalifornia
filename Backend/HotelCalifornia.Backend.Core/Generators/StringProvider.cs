@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace HotelCalifornia.Tests.DataProviders
+namespace HotelCalifornia.Backend.Core.Generators
 {
     public abstract class StringProvider : BaseClass
     {

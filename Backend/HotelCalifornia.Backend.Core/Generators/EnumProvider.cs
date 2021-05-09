@@ -1,6 +1,6 @@
 using System;
 
-namespace HotelCalifornia.Tests.DataProviders
+namespace HotelCalifornia.Backend.Core.Generators
 {
     public abstract class EnumProvider : BaseClass
     {
