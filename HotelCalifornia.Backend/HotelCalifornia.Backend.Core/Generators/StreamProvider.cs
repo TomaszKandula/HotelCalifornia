@@ -5,7 +5,7 @@ namespace HotelCalifornia.Backend.Core.Generators
     public abstract class StreamProvider : BaseClass
     {
         public static MemoryStream GetRandom(int ASizeInKb = 12)
-            => new MemoryStream(GetRandomByteArray(ASizeInKb));
+            => new (GetRandomByteArray(ASizeInKb));
         
         private static byte[] GetRandomByteArray(int ASizeInKb = 12)
         {
