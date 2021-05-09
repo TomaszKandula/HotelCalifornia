@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace HotelCalifornia.Backend.Database.Initialize
+﻿namespace HotelCalifornia.Backend.Database.Initializer
 {   
     public interface IDbInitializer
     {
@@ -14,6 +12,6 @@ namespace HotelCalifornia.Backend.Database.Initialize
         /// <summary>
         /// Adds default values to the database if tables are empty (newly created).
         /// </summary>
-        Task SeedData();
+        void SeedData();
     }
 }
