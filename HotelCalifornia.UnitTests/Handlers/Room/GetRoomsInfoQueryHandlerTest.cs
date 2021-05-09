@@ -35,7 +35,7 @@ namespace HotelCalifornia.UnitTests.Handlers.Room
             
             var LBookings = new List<Bookings>
             {
-                new Bookings
+                new ()
                 {
                     RoomId = LRoom.Id,
                     GuestFullName = StringProvider.GetRandomString(),
@@ -43,7 +43,7 @@ namespace HotelCalifornia.UnitTests.Handlers.Room
                     DateFrom = FDateTimeService.Now.AddDays(5),
                     DateTo = FDateTimeService.Now.AddDays(15)
                 },
-                new Bookings
+                new ()
                 {
                     RoomId = LRoom.Id,
                     GuestFullName = StringProvider.GetRandomString(),

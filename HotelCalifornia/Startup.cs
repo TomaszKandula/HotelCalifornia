@@ -16,7 +16,7 @@ namespace HotelCalifornia
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        protected readonly IConfiguration FConfiguration;
+        private readonly IConfiguration FConfiguration;
         
         private readonly IWebHostEnvironment FEnvironment;
 
