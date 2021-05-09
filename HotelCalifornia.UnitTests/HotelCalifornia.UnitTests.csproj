@@ -13,8 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Backend\HotelCalifornia.Backend.Cqrs\HotelCalifornia.Backend.Cqrs.csproj" />
-      <ProjectReference Include="..\Backend\HotelCalifornia.Backend.Database\HotelCalifornia.Backend.Database.csproj" />
+      <ProjectReference Include="..\HotelCalifornia.Backend\HotelCalifornia.Backend.Cqrs\HotelCalifornia.Backend.Cqrs.csproj" />
+      <ProjectReference Include="..\HotelCalifornia.Backend\HotelCalifornia.Backend.Database\HotelCalifornia.Backend.Database.csproj" />
     </ItemGroup>
 
 </Project>
