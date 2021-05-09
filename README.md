@@ -48,31 +48,119 @@ _HotelCalifornia_
 
 | Folder | Description |
 |--------|-------------|
-| ClientApp | Frontend in React^ |
+| ClientApp | Frontend in React |
 | Configuration | Application dependencies |
 | Controllers | WebAPI |
 | Middleware | Custom middleware |
 
-^Unit tests are provided; use command `yarn test` to run all tests.
+In the current project version, the static bundles is hosted alongside the ASP.NET Core server-side application. This is the most straightforward approach, which works well in many situations. During the build process, the bundles are generated and copied to a preconfigured folder inside the ASP.NET Core application.
+
+Unit tests are provided; use command `yarn test` to run all tests.
 
 _Backend_
 
 | Folder | Description |
 |--------|-------------|
-| HotelCalifornia.Backend.Core | Reusable core elements |
-| HotelCalifornia.Backend.Cqrs | Handlers, mappers and related services |
-| HotelCalifornia.Backend.Database | Database context |
-| HotelCalifornia.Backend.Domain | Domain entities |
-| HotelCalifornia.Backend.Shared | Shared models and resources |
+| Backend.Core | Reusable core elements |
+| Backend.Cqrs | Handlers, mappers and related services |
+| Backend.Database | Database context |
+| Backend.Domain | Domain entities |
+| Backend.Shared | Shared models and resources |
 
 _Tests_
 
 | Folder | Description |
 |--------|-------------|
-| HotelCalifornia.Tests.TestData | Test helpers |
-| HotelCalifornia.Tests.UnitTests | Handlers and validators tests |
+| IntegrationTests | Http client tests |
+| UnitTests | Handlers and validators tests |
 
 To run backend tests, use command `dotnet test`.
+
+## Testing
+
+### Unit Tests setup
+
+Unit tests use SQLite in-memory database (a lightweight database that supports RDBMS). Each test uses a separate database instance, and therefore tables must be populated before a test can be run. Database instances are provided via the factory:
+
+```csharp
+internal class DatabaseContextFactory
+{
+    private readonly DbContextOptionsBuilder<DatabaseContext> FDatabaseOptions =
+        new DbContextOptionsBuilder<DatabaseContext>()
+            .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll)
+            .EnableSensitiveDataLogging()
+            .UseSqlite("Data Source=InMemoryDatabase;Mode=Memory");
+
+    public DatabaseContext CreateDatabaseContext()
+    {
+        var LDatabaseContext = new DatabaseContext(FDatabaseOptions.Options);
+        LDatabaseContext.Database.OpenConnection();
+        LDatabaseContext.Database.EnsureCreated();
+        return LDatabaseContext;
+    }
+}
+```
+
+Each test can easily access `CreateDatabaseContext()` method via `GetTestDatabaseContext()` as long as test class inherits from `TestBase` class:
+
+```csharp
+public class TestBase
+{
+    private readonly DatabaseContextFactory FDatabaseContextFactory;
+
+    protected TestBase() 
+    {
+        var LServices = new ServiceCollection();
+
+        LServices.AddSingleton<DatabaseContextFactory>();
+        LServices.AddScoped(AContext =>
+        {
+            var LFactory = AContext.GetService<DatabaseContextFactory>();
+            return LFactory?.CreateDatabaseContext();
+        });
+
+        var LServiceScope = LServices.BuildServiceProvider(true).CreateScope();
+        var LServiceProvider = LServiceScope.ServiceProvider;
+        FDatabaseContextFactory = LServiceProvider.GetService<DatabaseContextFactory>();
+    }
+
+    protected DatabaseContext GetTestDatabaseContext()
+        =>  FDatabaseContextFactory.CreateDatabaseContext();
+}
+```
+
+### Integration Tests setup
+
+Integration test uses SQL Server database either local or remote, accordingly to a given connection string. Each test class uses `WebApplicationFactory`:
+
+```csharp
+public class CustomWebApplicationFactory<TTestStartup> : WebApplicationFactory<TTestStartup> where TTestStartup : class
+{
+    protected override IWebHostBuilder CreateWebHostBuilder()
+    {
+        var LBuilder = WebHost.CreateDefaultBuilder()
+            .ConfigureAppConfiguration(AConfig =>
+            {
+                var LStartupAssembly = typeof(TTestStartup).GetTypeInfo().Assembly;
+                var LTestConfig = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.Staging.json", optional: true, reloadOnChange: true)
+                    .AddUserSecrets(LStartupAssembly)
+                    .AddEnvironmentVariables()
+                    .Build();
+              
+                AConfig.AddConfiguration(LTestConfig);
+            })
+            .UseStartup<TTestStartup>()
+            .UseTestServer();
+            
+        return LBuilder;
+    }
+}
+```
+
+I use `user secrets` with a connection string for local development, pointing to an instance of SQL Express that runs in Docker. However, if the test project would run in CI/CD pipeline, then we use connection string defined in `appsettings.Staging.json` for a remote test database.
+
+Class `CustomWebApplicationFactory` requires the `Startup` class to configure necessary services. Thus test project has its own `TestStartup.cs` that inherits from the main project `Startup.cs`. We register only necessary services.
 
 ## CQRS
 
@@ -318,7 +406,8 @@ Copy below code from `appsettings.Development.json` to **user secrets**: and rep
 ```
 "ConnectionStrings":
 {
-    "DbConnect": "set_env"
+    "DbConnect": "set_env",
+    "DbConnectTest": "set_env"
 },
 "AppUrls":
 {
@@ -333,7 +422,7 @@ Use `http://localhost:3000` or any other used by the frontend.
 
 ### Development environment:
 
-If `set_env` remains unchanged, the application will use SQL database in-memory. However, suppose one is willing to use a local/remote SQL database. In that case, they should replace `set_env` with a valid connection string (note: application always uses in-memory database when the connection string is invalid). Application seeds test when the existing tables are not populated, and migration is performed only on the local/remote SQL database.
+Replace `set_env` with connection strings of choice. Please note that `DbConnect` points to a main database (local development / production), and `DbConnectTest` points to a test database for integration tests only.
 
 ### Manual migration
 
@@ -341,7 +430,7 @@ Go to Package Manager Console (PMC) to execute following command:
 
 `Update-Database -StartupProject HotelCalifronia -Project HotelCalifronia.Backend.Database -Context DatabaseContext`
 
-EF Core will create all the necessary tables. More on migrations here: [HotelCalifornia.Backend.Database](https://github.com/TomaszKandula/HotelCalifornia/tree/master/Backend/HotelCalifornia.Backend.Database).
+EF Core will create all the necessary tables and seed demo data. More on migrations here: [HotelCalifornia.Backend.Database](https://github.com/TomaszKandula/HotelCalifornia/tree/master/Backend/HotelCalifornia.Backend.Database).
 
 ### Running the backend
 
@@ -356,7 +445,7 @@ REACT_APP_API_VER=1
 REACT_APP_BACKEND=http://localhost:5000
 ```
 
-Finally, run command `yarn start`. After successfull compilation application will start in a web browser.
+Finally, run command `yarn start`. After successful compilation application will start in a web browser.
 
 ## End note
 
