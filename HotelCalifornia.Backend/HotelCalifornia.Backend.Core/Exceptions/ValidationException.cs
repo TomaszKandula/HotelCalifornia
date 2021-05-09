@@ -6,9 +6,7 @@ namespace HotelCalifornia.Backend.Core.Exceptions
     {
         public ValidationResult ValidationResult { get; }
 
-        public ValidationException(ValidationResult AValidationResult) : base(CommonErrorCodes.VALIDATION_ERROR)
-        {
-            ValidationResult = AValidationResult;
-        }
+        public ValidationException(ValidationResult AValidationResult, string AErrorMessage = "") : base(AErrorMessage)
+            => ValidationResult = AValidationResult;
     }
 }
