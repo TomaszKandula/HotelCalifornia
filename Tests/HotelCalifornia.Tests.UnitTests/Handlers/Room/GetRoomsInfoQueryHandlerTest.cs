@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using HotelCalifornia.Tests.DataProviders;
+using HotelCalifornia.Backend.Core.Generators;
 using HotelCalifornia.Backend.Domain.Entities;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Queries.Booking;

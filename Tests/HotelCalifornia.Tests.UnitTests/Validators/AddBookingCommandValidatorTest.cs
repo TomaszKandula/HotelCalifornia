@@ -3,7 +3,7 @@ using FluentAssertions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HotelCalifornia.Tests.DataProviders;
+using HotelCalifornia.Backend.Core.Generators;
 using HotelCalifornia.Backend.Shared.Resources;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking;
