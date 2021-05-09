@@ -22,7 +22,7 @@ namespace HotelCalifornia.Configuration
             SetupDatabase(AServices, AConfiguration);
         }
         
-        private static void CommonServices(IServiceCollection AServices, IConfiguration AConfiguration)
+        public static void CommonServices(IServiceCollection AServices, IConfiguration AConfiguration)
         {
             SetupAppSettings(AServices, AConfiguration);
             SetupLogger(AServices);

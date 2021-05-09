@@ -16,7 +16,7 @@ namespace HotelCalifornia
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        private readonly IConfiguration FConfiguration;
+        protected readonly IConfiguration FConfiguration;
         
         private readonly IWebHostEnvironment FEnvironment;
 
@@ -26,7 +26,7 @@ namespace HotelCalifornia
             FEnvironment = AEnvironment;
         }
         
-        public void ConfigureServices(IServiceCollection AServices)
+        public virtual void ConfigureServices(IServiceCollection AServices)
         {
             AServices.AddMvc();
             AServices.AddControllers();          
@@ -41,7 +41,7 @@ namespace HotelCalifornia
             }
         }
 
-        public void Configure(IApplicationBuilder AApplication, AppUrls AAppUrls)
+        public virtual void Configure(IApplicationBuilder AApplication, AppUrls AAppUrls)
         {
             AApplication.UseSerilogRequestLogging();
             AApplication.UseExceptionHandler(ExceptionHandler.Handle);

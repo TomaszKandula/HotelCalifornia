@@ -5,7 +5,6 @@ namespace HotelCalifornia.Controllers
 {
     [Route("api/v1/[controller]/[action]")]
     [ApiController]
-    [ResponseCache(CacheProfileName = "Standard")]
     public class __BaseController : ControllerBase
     {
         protected readonly IMediator FMediator;

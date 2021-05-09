@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.Backend.Shared", "HotelCalifornia.Backend\HotelCalifornia.Backend.Shared\HotelCalifornia.Backend.Shared.csproj", "{AC51B882-D6D5-4818-BB9B-A8E8D92A29DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCalifornia.IntegrationTests", "HotelCalifornia.IntegrationTests\HotelCalifornia.IntegrationTests.csproj", "{4ECACF68-314B-4C6C-8E89-C7A4AE6CE741}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{AC51B882-D6D5-4818-BB9B-A8E8D92A29DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC51B882-D6D5-4818-BB9B-A8E8D92A29DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC51B882-D6D5-4818-BB9B-A8E8D92A29DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ECACF68-314B-4C6C-8E89-C7A4AE6CE741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ECACF68-314B-4C6C-8E89-C7A4AE6CE741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ECACF68-314B-4C6C-8E89-C7A4AE6CE741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ECACF68-314B-4C6C-8E89-C7A4AE6CE741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FECB0904-B713-4F6F-873E-E4FB95BB3CC8} = {F732002F-CE4E-478A-9416-22D18412A2B3}
@@ -60,5 +66,6 @@ Global
 		{460CC5CC-8C21-4F44-84B1-22D42F87A4C7} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
 		{146A27FC-E8C8-4739-9611-FDC7EFB6D231} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
 		{AC51B882-D6D5-4818-BB9B-A8E8D92A29DF} = {AB5714E4-FC97-4EF9-9E52-A5F3A2A573B0}
+		{4ECACF68-314B-4C6C-8E89-C7A4AE6CE741} = {F732002F-CE4E-478A-9416-22D18412A2B3}
 	EndGlobalSection
 EndGlobal
