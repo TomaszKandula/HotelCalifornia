@@ -6,7 +6,7 @@ using HotelCalifornia.Backend.Cqrs;
 using HotelCalifornia.Backend.Database;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Core.Behaviours;
-using HotelCalifornia.Backend.Database.Initialize;
+using HotelCalifornia.Backend.Database.Initializer;
 using HotelCalifornia.Backend.Core.Services.AppLogger;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
 using FluentValidation;

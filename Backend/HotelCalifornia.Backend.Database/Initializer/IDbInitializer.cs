@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HotelCalifornia.Backend.Database.Initialize
+namespace HotelCalifornia.Backend.Database.Initializer
 {   
     public interface IDbInitializer
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HotelCalifornia.Backend.Database.Seeders;
 
-namespace HotelCalifornia.Backend.Database.Initialize
+namespace HotelCalifornia.Backend.Database.Initializer
 {
     public class DbInitializer : IDbInitializer
     {
