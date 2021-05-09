@@ -7,7 +7,7 @@ namespace HotelCalifornia.Backend.Cqrs.Mappers
     {
         public static AddBookingCommand MapToAddBookingCommand(AddBookingDto AModel)
         {
-            return new AddBookingCommand
+            return new ()
             {
                 GuestFullName = AModel.GuestFullName,
                 GuestPhoneNumber = AModel.GuestPhoneNumber,
@@ -19,7 +19,7 @@ namespace HotelCalifornia.Backend.Cqrs.Mappers
         
         public static RemoveBookingCommand MapToRemoveBookingCommand(RemoveBookingDto AModel) 
         {
-            return new RemoveBookingCommand 
+            return new () 
             { 
                 Id = AModel.BookingId
             };

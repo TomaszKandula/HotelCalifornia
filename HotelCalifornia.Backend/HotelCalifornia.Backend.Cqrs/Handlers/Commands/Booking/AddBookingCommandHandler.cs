@@ -57,7 +57,7 @@ namespace HotelCalifornia.Backend.Cqrs.Handlers.Commands.Booking
             var LRoomNumber = await FDatabaseContext.Rooms
                 .Where(ARooms => ARooms.Id == LNewBooking.RoomId)
                 .Select(ARooms => ARooms.RoomNumber)
-                .SingleOrDefaultAsync(cancellationToken: ACancellationToken);
+                .SingleOrDefaultAsync(ACancellationToken);
             
             return new AddBookingCommandResult
             {
