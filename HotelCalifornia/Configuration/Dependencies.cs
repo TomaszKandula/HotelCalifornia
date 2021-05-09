@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +6,6 @@ using HotelCalifornia.Backend.Cqrs;
 using HotelCalifornia.Backend.Database;
 using HotelCalifornia.Backend.Shared.Settings;
 using HotelCalifornia.Backend.Core.Behaviours;
-using HotelCalifornia.Backend.Core.Extensions;
 using HotelCalifornia.Backend.Database.Initialize;
 using HotelCalifornia.Backend.Core.Services.AppLogger;
 using HotelCalifornia.Backend.Core.Services.DateTimeService;
@@ -22,27 +20,6 @@ namespace HotelCalifornia.Configuration
         {
             CommonServices(AServices, AConfiguration);
             SetupDatabase(AServices, AConfiguration);
-        }
-
-        public static void RegisterForTests(IServiceCollection AServices, IConfiguration AConfiguration) 
-        {
-            CommonServices(AServices, AConfiguration);
-            SetupDatabaseForTest(AServices);
-        }
-
-        public static void RegisterForDevelopment(IServiceCollection AServices, IConfiguration AConfiguration)
-        {
-            var LIsValidConnection = AConfiguration
-                .GetConnectionString("DbConnect")
-                .IsValidConnectionString();
-
-            if (!LIsValidConnection)
-            {
-                RegisterForTests(AServices, AConfiguration);
-                return;
-            }
-
-            Register(AServices, AConfiguration);
         }
         
         private static void CommonServices(IServiceCollection AServices, IConfiguration AConfiguration)
@@ -68,17 +45,6 @@ namespace HotelCalifornia.Configuration
             {
                 AOptions.UseSqlServer(AConfiguration.GetConnectionString("DbConnect"),
                 AAddOptions => AAddOptions.EnableRetryOnFailure());
-            });
-        }
-
-        private static void SetupDatabaseForTest(IServiceCollection AServices)
-        {
-            var LDatabaseName = Guid.NewGuid().ToString();
-            AServices.AddDbContext<DatabaseContext>(AOptions =>
-            {
-                AOptions.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
-                AOptions.EnableSensitiveDataLogging();
-                AOptions.UseInMemoryDatabase(LDatabaseName);
             });
         }
 
