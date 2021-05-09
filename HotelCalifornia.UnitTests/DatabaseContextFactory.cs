@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using HotelCalifornia.Backend.Database;
 
-namespace HotelCalifornia.Tests.UnitTests
+namespace HotelCalifornia.UnitTests
 {
     internal class DatabaseContextFactory
     {

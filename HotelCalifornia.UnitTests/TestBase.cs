@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using HotelCalifornia.Backend.Database;
 
-namespace HotelCalifornia.Tests.UnitTests
+namespace HotelCalifornia.UnitTests
 {
     public class TestBase
     {
