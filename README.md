@@ -55,7 +55,7 @@ _HotelCalifornia_
 
 In the current project version, the static bundles is hosted alongside the ASP.NET Core server-side application. This is the most straightforward approach, which works well in many situations. During the build process, the bundles are generated and copied to a preconfigured folder inside the ASP.NET Core application.
 
-Unit tests are provided; use command `yarn test` to run all tests.
+Unit tests are provided; use command `yarn test` to run all tests for the frontend.
 
 _Backend_
 
