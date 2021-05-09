@@ -162,6 +162,8 @@ I use `user secrets` with a connection string for local development, pointing to
 
 Class `CustomWebApplicationFactory` requires the `Startup` class to configure necessary services. Thus test project has its own `TestStartup.cs` that inherits from the main project `Startup.cs`. We register only necessary services.
 
+Note: before integration tests can run, test database must be up.
+
 ## CQRS
 
 The project uses a CQRS architectural pattern with no event sourcing (changes to the application state are **not** stored as a sequence of events). I used the MediatR library (mediator pattern) with the handler template.
@@ -422,7 +424,7 @@ Use `http://localhost:3000` or any other used by the frontend.
 
 ### Development environment:
 
-Replace `set_env` with connection strings of choice. Please note that `DbConnect` points to a main database (local development / production), and `DbConnectTest` points to a test database for integration tests only.
+Replace `set_env` with connection strings of choice. Please note that `DbConnect` points to a main database (local development / production), and `DbConnectTest` points to a test database for integration tests only. Application migarte and seed tests data when run in development mode, however, for integration tests, test database must be already up. 
 
 ### Manual migration
 
