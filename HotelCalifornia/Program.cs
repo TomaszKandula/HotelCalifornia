@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Serilog;
@@ -6,10 +7,11 @@ using Serilog.Events;
 
 namespace HotelCalifornia
 {
-    public class Program
+    [ExcludeFromCodeCoverage]
+    public static class Program
     {
-        private static IWebHostBuilder CreateWebHostBuilder(string[] AArgs) =>
-            WebHost.CreateDefaultBuilder(AArgs)
+        private static IWebHostBuilder CreateWebHostBuilder(string[] AParams) =>
+            WebHost.CreateDefaultBuilder(AParams)
                 .UseStartup<Startup>()
                 .UseSerilog((AContext, AConfig) =>
                 {
@@ -20,12 +22,12 @@ namespace HotelCalifornia
                     AConfig.Enrich.FromLogContext();
                 });
 
-        public static int Main(string[] AArgs)
+        public static int Main(string[] AParams)
         {
             try
             {
                 Log.Information("Starting WebHost...");
-                CreateWebHostBuilder(AArgs).Build().Run();
+                CreateWebHostBuilder(AParams).Build().Run();
                 return 0;
             }
             catch (Exception LException)
