@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using HotelCalifornia.Backend.Database.Dummies;
 using HotelCalifornia.Backend.Domain.Entities;
 
-namespace HotelCalifornia.Backend.Database.Seeders
+namespace HotelCalifornia.Backend.Database.Initializer.Seeders
 {
     public static class RoomsSeeder
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using HotelCalifornia.Backend.Database.Seeders;
+using HotelCalifornia.Backend.Database.Initializer.Seeders;
 
 namespace HotelCalifornia.Backend.Database.Initializer
 {
